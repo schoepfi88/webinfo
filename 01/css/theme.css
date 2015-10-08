@@ -1,0 +1,25 @@
+body {background-color: lightblue;}
+[id="header2"] { height: 80px; font-family: Montserrat; color: white; font-size: 34pt; text-align: center;}
+[id="table"] {
+	font-family: Montserrat; 
+	width:80%; 
+	border: 1px; 
+	border-color: black; 
+	border-style: solid; 
+	border-spacing: 20px;
+	margin-left: 10%;
+	}
+button {
+	height: 30pt; 
+	width: 50%; 
+	color: black; 
+	background-color: white; 
+	border-color: white;
+	border: 1pt solid;
+	border
+	font-family: Montserrat;
+	-moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    border-radius:10px;
+	}
+td {text-align: center;}
