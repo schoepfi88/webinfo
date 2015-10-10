@@ -8,10 +8,10 @@
 </head>
 <body>
 
-<h1 id="header2">Balthazar</h1>
+<h1 id="header2">Balthasar</h1>
 <table id="table">
 	<tr>
-		<td id="name1">Balthazar</td>
+		<td id="name1">Balthasar</td>
   	</tr>
   	<tr>
   		<td>Huber</td>
