@@ -17,7 +17,8 @@
 		$subject=$_POST['subject'];
 		$content=$_POST['content'];
 		$session_id = session_id();
-		$sql = "INSERT INTO entry (session_id, reporter, subject, content) VALUES ('$session_id', '$reporter', '$subject', '$content')";
+		echo $session_id;
+        $sql = "INSERT INTO entry (session_id, reporter, subject, content) VALUES ('$session_id', '$reporter', '$subject', '$content')";
 	
 		if ($conn->query($sql) === TRUE) {
 			$error = "New entry created successfully";
