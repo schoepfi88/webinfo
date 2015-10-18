@@ -17,7 +17,9 @@
 		$subject=$_POST['subject'];
 		$content=$_POST['content'];
 		$session_id = session_id();
-		echo $session_id;
+       
+
+		
         $sql = "INSERT INTO entry (session_id, reporter, subject, content) VALUES ('$session_id', '$reporter', '$subject', '$content')";
 	
 		if ($conn->query($sql) === TRUE) {
@@ -75,13 +77,17 @@ $conn->close();
                         <td></td>
                         <td>
                             <input id="submit" name="submit" type="submit" value=" Create ">
-                            <button id="back"><a href="/">Back</a></button>
-                            
+                            <button id="back"><a href="/">Reset</a></button>
+
                         </td>
                     </tr>
                     <tr>
-								<td></td>
-								<td><div class="feedback"><?php echo $error; ?></div></td>                    
+                        <td></td>
+                        <td>
+                            <div class="feedback">
+                                <?php echo $error; ?>
+                            </div>
+                        </td>
                     </tr>
                 </table>
             </form>

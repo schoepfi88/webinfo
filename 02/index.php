@@ -40,7 +40,7 @@ include('login.php');
         } 
 
         $sql = "SELECT reporter, subject, 
-            content FROM entry WHERE  session_id='$session_id'";
+            content,created_at FROM entry WHERE  session_id='$session_id'";
         $result = $conn->query($sql);
 
         if($result->num_rows > 0) {
@@ -51,7 +51,7 @@ include('login.php');
                 echo "<tr>";
                 echo "<td class=\"reporter\">".$row["reporter"]."</td>";
                 echo "<td class=\"subject\">".$row["subject"]."</td>";
-                echo "<td class=\"time\">13:12 pm </td>";
+                echo "<td class=\"time\">".$row["created_at"]."</td>";
                 echo "</tr>";
                 echo"</table>";
                 echo"<table class=\"tableBody\">";
@@ -88,11 +88,6 @@ include('login.php');
             </table>
             <table id="tableBody">
 -->
-            <tr>
-                <td>
-                    <?php echo session_id(); ?>
-                </td>
-            </tr>
             </table>
     </body>
 
