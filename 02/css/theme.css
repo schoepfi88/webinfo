@@ -1,98 +1,109 @@
 body {
-	background-image: url("../images/blog1.png") ;
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-size: 100%;
-	margin: 0;
-	padding: 0;
+    background-image: url("../images/blog1.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-h1 { 
-	font-family: Montserrat; 
-	color: #380B61; 
-	font-size: 34pt; 
-	text-align: center;
-	margin: 0;
-	padding: 0;}
+h1 {
+    font-family: Montserrat;
+    color: #380B61;
+    font-size: 34pt;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
 table {
-	font-family: Montserrat; 
-	width:80%;
-	color: white;
-	border: 4px; 
-	border-color: white; 
-	background-color: white;
-	border-style: solid; 
-	border-spacing: 20px;
-	margin-left: 10%;
-	opacity: 0.7;
-	}
-	
-#tableHead {
-	background-color: white;
-	color: #380B61;
+    font-family: Montserrat;
+    width: 80%;
+    color: white;
+    border: 4px;
+    border-color: white;
+    background-color: white;
+    border-style: solid;
+    border-spacing: 20px;
+    margin-left: 10%;
+    opacity: 0.7;
 }
 
-#tableBody{
-	border-top-width: 0px;
-	text-align: left;
-	background-color: #380B61;
+#tableHead {
+    background-color: white;
+    color: #380B61;
 }
-	
+
+#tableBody {
+    border-top-width: 0px;
+    text-align: left;
+    background-color: #380B61;
+}
+
+#formtable {
+    color: #380B61;
+    align-self: center;
+}
+
 #time {
-	text-align: right;
-	width: 33%;
+    text-align: right;
+    width: 33%;
 }
-#subject {
-	text-align: center;
-	width: 33%;
-}
+
 #reporter {
-	width: 33%;
+    width: 33%;
 }
 
 #menu li {
-	 width: 33.3333%;
+    width: 33.3333%;
     float: left;
     font-size: 22px;
     height: 80px;
 }
 
 #menu a {
-	padding-top: 10px;
-	display: block;
-	width: 100%;
-	height: 40px;
-	color: white;
-	background-color: #380B61;
-	text-decoration: none;
-	text-align: center;
-	border-top: 4px solid white;
-	border-bottom: 4px solid white;
-	opacity: 0.8;
+    padding-top: 10px;
+    display: block;
+    width: 100%;
+    height: 40px;
+    color: white;
+    background-color: #380B61;
+    text-decoration: none;
+    text-align: center;
+    border-top: 4px solid white;
+    border-bottom: 4px solid white;
+    opacity: 0.8;
 }
 
 #menu a:hover {
-	background-color: #6666AA;
+    background-color: #6666AA;
 }
+
 #menu ul {
-	 font-family: Montserrat;
+    font-family: Montserrat;
     list-style-type: none;
     margin: 0px;
     padding: 0px;
 }
 
+#entry {
+    /*float: left;
+    /position: relative;
+    //left: 50%;
+    */
+    width: 60%;
+    margin: auto;
+}
 
-button {
-	height: 30pt; 
-	width: 50%; 
-	color: black; 
-	background-color: white; 
-	border-color: white;
-	border: 1pt solid;
-	border
-	font-family: Montserrat;
-	-moz-border-radius:10px;
-    -webkit-border-radius:10px;
-    border-radius:10px;
-	}
-
+# button {
+    height: 30pt;
+    width: 50%;
+    color: black;
+    background-color: white;
+    border-color: white;
+    border: 1pt solid;
+    border font-family: Montserrat;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}

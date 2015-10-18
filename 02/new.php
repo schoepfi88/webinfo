@@ -29,26 +29,64 @@
 $conn->close();
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>Create Blog Entry</title>
-</head>
-<body>
+    <!DOCTYPE html>
 
-<h1>Create Entry</h1>
-<div id="entry">
-	<form action="" method="post">
-	<label>Reporter :</label>
-	<input id="name" name="username" placeholder="username" type="text">
-	<label>Subject :</label>
-	<input id="subject" name="subject" placeholder="subject" type="text">
-	<label>Content :</label>
-	<input id="content" name="content" placeholder="content" type="text">
-	<input name="submit" type="submit" value=" Create ">
-	<span><?php echo $error; ?></span>
-</form>
+    <head>
+        <title>My Blog</title>
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="css/theme.css">
+        <script language="javascript" type="text/javascript" src="script/control.js"></script>
+    </head>
 
-</div>
-</body>
-</html>
+    <body>
+        <div id="menu">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="new.php">Create Entry</a></li>
+                <li><a href="/">About</a></li>
+            </ul>
+        </div>
+
+        <h1>Create Entry</h1>
+        <div id="entry">
+            <form id="form1" action="" method="post">
+                <table id="formtable">
+                    <tr>
+                        <td>User</td>
+                        <td>
+                            <input id="name" name="username" placeholder="username" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Subject</td>
+                        <td>
+                            <input id="subject" name="subject" placeholder="subject" type="text">
+                    </tr>
+                    <tr>
+                        <td>Content</td>
+                        <td>
+                            <!--<input id="content" name="content" placeholder="content" type="textarea">-->
+                            <textarea id="content" name="content" placeholder="Blog bla bla.." cols="50" rows="10" form="form1"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input name="submit" type="submit" value=" Create ">
+                        </td>
+                    </tr>
+
+
+
+                </table>
+                <!--
+
+<span><?php echo $error; ?></span>
+-->
+            </form>
+
+        </div>
+
+    </body>
+
+    </html>
