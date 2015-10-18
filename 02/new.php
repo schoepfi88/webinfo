@@ -20,7 +20,7 @@
 		$sql = "INSERT INTO entry (session_id, reporter, subject, content) VALUES ('$session_id', '$reporter', '$subject', '$content')";
 	
 		if ($conn->query($sql) === TRUE) {
-			echo "New entry created successfully";
+			$error = "New entry created successfully";
 			
 		} else {
 			echo "Error: " . $sql . "<br>" . $conn->error;
@@ -48,6 +48,7 @@ $conn->close();
         </div>
 
         <h1>Create Entry</h1>
+        <br>
         <div id="entry">
             <form id="form1" action="" method="post">
                 <table id="formtable">
@@ -72,17 +73,16 @@ $conn->close();
                     <tr>
                         <td></td>
                         <td>
-                            <input name="submit" type="submit" value=" Create ">
+                            <input id="submit" name="submit" type="submit" value=" Create ">
+                            <button id="back"><a href="/">Back</a></button>
+                            
                         </td>
                     </tr>
-
-
-
+                    <tr>
+								<td></td>
+								<td><div class="feedback"><?php echo $error; ?></div></td>                    
+                    </tr>
                 </table>
-                <!--
-
-<span><?php echo $error; ?></span>
--->
             </form>
 
         </div>

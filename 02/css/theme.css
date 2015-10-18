@@ -95,15 +95,57 @@ table {
     margin: auto;
 }
 
-# button {
-    height: 30pt;
-    width: 50%;
-    color: black;
+button {
+    width: 30%;
+    color: #380B61;
     background-color: white;
     border-color: white;
     border: 1pt solid;
-    border font-family: Montserrat;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
+    font-family: Montserrat;
     border-radius: 10px;
+}
+
+
+#submit {
+    width: 30%;
+    color: #380B61;
+    background-color: white;
+    border-color: white;
+    border: 1pt solid;
+    font-family: Montserrat;
+    border-radius: 10px;
+}
+
+#back {
+	float: right;
+	font-family:  Montserrat;
+}
+
+a {
+	text-decoration: none;
+}
+
+#content {
+	width: 99%;
+}
+
+.feedback {
+	color: black !important;
+	font-size: 12px;
+}
+
+
+*::-webkit-input-placeholder {
+    font-family: Montserrat;
+}
+
+*:-ms-input-placeholder {
+    font-family: Montserrat;
+
+*:-moz-placeholder {
+    font-family:  Montserrat;
+}
+
+*::-moz-placeholder {
+    font-family:  Montserrat;
 }
