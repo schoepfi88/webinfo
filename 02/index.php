@@ -1,3 +1,6 @@
+<?php
+include('login.php');
+?>
 <!DOCTYPE html>
 <head>
 <title>My Blog</title>
@@ -41,7 +44,7 @@
 </table>
 <table id="tableBody">
 	<tr>
-		<td>tesjafsldfj asdflj asdlfja sdlfj asasdfa sasdf asdf asdf ldfj asldfj </td>
+		<td> <?php echo session_id(); ?></td>
   	</tr>
 </table>
 </body>
