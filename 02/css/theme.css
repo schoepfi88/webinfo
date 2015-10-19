@@ -135,9 +135,19 @@ button {
 	border: 1pt solid;
 	border-color: white;
 	color: white;
-	border-radius: 10px;
-	padding-left: 10%;
-	padding-right: 10%;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+#more {
+	float: right;
+	font-family:  Montserrat;
+	border: 1pt solid;
+	border-color: white;
+	color: white;
+	padding-left: 5%;
+	padding-right: 5%;
+	margin-right: 2%;
 }
 
 

@@ -69,7 +69,6 @@ if($_GET['action'] == 'delete') {
         if($result->num_rows > 0) {
         //echo"es is grosser als 0";
         }
-        
             while($row = $result->fetch_assoc()){
                 echo "<table class=\"tableHead\">";
                 echo "<tr>";
@@ -80,9 +79,12 @@ if($_GET['action'] == 'delete') {
                 echo"</table>";
                 echo"<table class=\"tableBody\">";
                 echo"<tr>";
-                echo"<td class=\"content\">".$row["content"]."</td>";
+					 $string =$row["content"];
+                $string = (strlen($string) > 13) ? substr($string,0,10).'...' : $string;
+                echo"<td class=\"content\">".$string."</td>";
                 echo"<td><a id = \"del\" href=\"/index.php?action=delete&index=".$row["entry_id"]."\"> Delete </a>";
-                echo"</tr></table>";
+                echo"<a id = \"more\" href=\"/entry.php?action=more&index=".$row["entry_id"]."\"> More </a>";
+                echo"</td></tr></table>";
                 echo "<p>";
         
             }
