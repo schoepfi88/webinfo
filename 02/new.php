@@ -75,11 +75,11 @@ $conn->close();
                     </tr>
                     <tr>
                         <td></td>
+                        
                         <td>
                             <input id="submit" name="submit" type="submit" value=" Create ">
-                            <button id="back"><a href="/">Reset</a></button>
-
-                        </td>
+                            <a id = "back" href="/"> Back </a>
+              				</td>
                     </tr>
                     <tr>
                         <td></td>

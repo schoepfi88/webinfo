@@ -1,6 +1,29 @@
 <?php
 include('login.php');
 
+if($_GET['action'] == 'delete') {
+  	$servername = "localhost";
+	$username = "root";
+	$password = "password";
+	$dbname = "blog";
+
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	// Check connection
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+	}
+	
+	$sql = "DELETE FROM entry WHERE entry_id = ".$_GET['index'];
+	
+	if ($conn->query($sql) === TRUE) {
+		$error = "Entry deleted successfully";
+			
+	} else {
+		$error = "Error: " . $sql . "<br>" . $conn->error;
+	}
+}
+
 ?>
     <!DOCTYPE html>
 
@@ -39,13 +62,14 @@ include('login.php');
             die("Connection failed: " . $conn->connect_error);
         } 
 
-        $sql = "SELECT reporter, subject, 
+        $sql = "SELECT entry_id, reporter, subject, 
             content,created_at FROM entry WHERE  session_id='$session_id'";
         $result = $conn->query($sql);
 
         if($result->num_rows > 0) {
         //echo"es is grosser als 0";
         }
+        
             while($row = $result->fetch_assoc()){
                 echo "<table class=\"tableHead\">";
                 echo "<tr>";
@@ -56,38 +80,14 @@ include('login.php');
                 echo"</table>";
                 echo"<table class=\"tableBody\">";
                 echo"<tr>";
-                echo"<td>".$row["content"]."</td>";
-                echo"</table>";
+                echo"<td class=\"content\">".$row["content"]."</td>";
+                echo"<td><a id = \"del\" href=\"/index.php?action=delete&index=".$row["entry_id"]."\"> Delete </a>";
+                echo"</tr></table>";
                 echo "<p>";
         
             }
         $conn->close();
         ?>
-
-            <!--
-            <table id="tableHead">
-                <tr>
-                    <td id="reporter">Hermann Maier</td>
-                    <td id="subject">Training</td>
-                    <td id="time">13:12 pm</td>
-                </tr>
-            </table>
-            <table id="tableBody">
-                <tr>
-                    <td>tesjafsldfj asdflj asdlfja sdlfj asasdfa sasdf asdf asdf ldfj asldfj </td>
-                </tr>
-            </table>
-            <br>
-
-            <table id="tableHead">
-                <tr>
-                    <td id="reporter">Hermann Maier</td>
-                    <td id="subject">Training</td>
-                    <td id="time">13:12 pm</td>
-                </tr>
-            </table>
-            <table id="tableBody">
--->
             </table>
     </body>
 

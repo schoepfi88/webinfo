@@ -54,6 +54,11 @@ table {
     width: 33%;
 }
 
+.subject {
+	width: 33%;
+	text-align: center;
+}
+
 #menu li {
     width: 33.3333%;
     float: left;
@@ -96,7 +101,6 @@ table {
 }
 
 button {
-    width: 30%;
     color: #380B61;
     background-color: white;
     border-color: white;
@@ -119,7 +123,23 @@ button {
 #back {
 	float: right;
 	font-family:  Montserrat;
+	border: 1pt solid;
+	border-radius: 10px;
+	padding-left: 10%;
+	padding-right: 10%;
 }
+
+#del {
+	float: right;
+	font-family:  Montserrat;
+	border: 1pt solid;
+	border-color: white;
+	color: white;
+	border-radius: 10px;
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
 
 a {
 	text-decoration: none;
@@ -127,7 +147,9 @@ a {
 
 #content {
 	width: 99%;
+	font-family: Montserrat;
 }
+
 
 .feedback {
 	color: black !important;
@@ -141,7 +163,7 @@ a {
 
 *:-ms-input-placeholder {
     font-family: Montserrat;
-
+}
 *:-moz-placeholder {
     font-family:  Montserrat;
 }
