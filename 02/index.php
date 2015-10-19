@@ -56,7 +56,9 @@ include('login.php');
                 echo"</table>";
                 echo"<table class=\"tableBody\">";
                 echo"<tr>";
-                echo"<td>".$row["content"]."</td>";
+                $string =$row["content"];
+                $string = (strlen($string) > 13) ? substr($string,0,10).'...' : $string;
+                echo"<td>".$string."</td>";
                 echo"</table>";
                 echo "<p>";
         
