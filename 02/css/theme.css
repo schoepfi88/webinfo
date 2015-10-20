@@ -111,22 +111,27 @@ button {
 
 
 #submit {
-    width: 30%;
     color: #380B61;
     background-color: white;
     border-color: white;
     border: 1pt solid;
     font-family: Montserrat;
     border-radius: 10px;
+    font-size: 10pt !important;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 #back {
 	float: right;
-	font-family:  Montserrat;
+	font-family:  Montserrat, 5pt;
 	border: 1pt solid;
 	border-radius: 10px;
 	padding-left: 10%;
 	padding-right: 10%;
+	font-size: 10pt !important;
+	padding-bottom: 1px;
+	padding-top: 1px;
 }
 
 #del {
@@ -155,9 +160,13 @@ a {
 	text-decoration: none;
 }
 
-#content {
+#textarea {
 	width: 99%;
 	font-family: Montserrat;
+}
+
+.content {
+	width: 65%;
 }
 
 

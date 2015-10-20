@@ -67,14 +67,14 @@
 				<tr>
 					<td>Content</td>
 					<td>
-						<textarea id="content" name="content" placeholder="Blog bla bla.." cols="50" rows="10" form="form1"></textarea>
+						<textarea id="textarea" name="content" placeholder="Blog bla bla.." cols="50" rows="10" form="form1"></textarea>
 					</td>
 				</tr>
 				<tr>
 					<td></td>
 					<td>
-						<input id="submit" name="submit" type="submit" value=" Create ">
-						<a id = "back" href="/"> Back </a>
+						<input id="submit" name="submit" type="submit" value="Create">
+						<a id = "back" href="/">Back</a>
 					</td>
 				</tr>
 				<tr>
