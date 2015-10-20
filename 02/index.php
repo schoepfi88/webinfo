@@ -63,7 +63,7 @@ if($_GET['action'] == 'delete') {
 	} 
 
 	$sql = "SELECT entry_id, reporter, subject, 
-	content,created_at FROM entry WHERE  session_id='$session_id'";
+	content,created_at FROM entry WHERE  session_id='$session_id' order by created_at desc";
 	$result = $conn->query($sql);
 
 	while($row = $result->fetch_assoc()){
