@@ -16,6 +16,15 @@ h1 {
     padding: 0;
 }
 
+h2 {
+    font-family: Montserrat;
+    color: #380B61;
+    font-size: 25pt;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
 table {
     font-family: Montserrat;
     width: 80%;
@@ -92,24 +101,37 @@ table {
 }
 
 #entry {
-    /*float: left;
-    /position: relative;
-    //left: 50%;
-    */
     width: 60%;
     margin: auto;
 }
 
-button {
-    color: #380B61;
-    background-color: white;
-    border-color: white;
-    border: 1pt solid;
-    font-family: Montserrat;
-    border-radius: 10px;
+#comment {
+    width: 60%;
+    margin: auto;
+    visibility: hidden;
 }
 
+.comments {
+    width: 60%;
+    margin: auto;
+    
+}
+/* only used for comment button */
+button {
+    background-color: #380B61;
+    border: 1pt solid;
+    border-color: white;
+    color: white;
+    font-family: Montserrat;
+    font-size: 10pt !important;
+    padding-left: 10%;
+    padding-right: 10%;
+    font-size: 12pt !important;
+    float: right;
+    margin-right: 5px;
+}
 
+/* link buttons */
 #submit {
     color: #380B61;
     background-color: white;
@@ -142,6 +164,8 @@ button {
 	color: white;
 	padding-left: 5%;
 	padding-right: 5%;
+    padding-bottom: 1px;
+    padding-top: 1px;
 }
 
 #more {
@@ -153,8 +177,10 @@ button {
 	padding-left: 5%;
 	padding-right: 5%;
 	margin-right: 2%;
+    padding-bottom: 1px;
+    padding-top: 1px;
 }
-
+/* link buttons*/
 
 a {
 	text-decoration: none;
