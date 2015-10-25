@@ -1,4 +1,4 @@
 -login page
--delete comments
 -hide functionality for specific usergroups
--text structure (html or bbCode)
+-about page
+-validation of input fields
