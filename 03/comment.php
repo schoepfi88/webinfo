@@ -1,5 +1,5 @@
 <?php
-
+	include('parseHtml.php');
 	$servername = "localhost";
 	$username = "root";
 	$password = "password";
@@ -13,23 +13,30 @@
 	} 
 
 	$id = $_POST['id'];
-	$name = $_POST['name'];
-	$text = $_POST['text'];
+	if ($_POST['action'] == "create"){
+		$name = $_POST['name'];
+		$text = $_POST['text'];
 
-	$sql = "INSERT into comment (entry_id, reporter, text) values ($id, '$name' , '$text')";
-	$result = $conn->query($sql);
+		$name = eliminateHtml($name);
+		$text = parseContent($text);
 
-	// TODO
-	//if (result != true)
-	//	return fail
-	
-	$sql1 = "SELECT comment_id, created_at, reporter, text from comment where entry_id = '$id' ORDER BY comment_id desc LIMIT 1";
-	$result1 = $conn->query($sql1);
-	$test = "";
-	while($row = $result1->fetch_assoc()){
-		$test = $test . $row['comment_id'] . "#?#" . $row['reporter']  . "#?#" . $row['text'] . "#?#" . $row['created_at'];
+		$sql = "INSERT into comment (entry_id, reporter, text) values ($id, '$name' , '$text')";
+		$result = $conn->query($sql);
+		
+		$sql1 = "SELECT comment_id, created_at, reporter, text from comment where entry_id = '$id' ORDER BY comment_id desc LIMIT 1";
+		$result1 = $conn->query($sql1);
+		$response = "";
+		while($row = $result1->fetch_assoc()){
+			$response = $response . $row['comment_id'] . "#?#" . $row['reporter']  . "#?#" . $row['text'] . "#?#" . $row['created_at'];
+		}
+		echo $response;
 	}
-	echo $test;
+
+	if ($_POST['action'] == "delete"){
+		$sql = "DELETE from comment WHERE comment_id = '$id'";
+		$result = $conn->query($sql);
+		echo $id;
+	}
 
 	$conn->close();
 ?>

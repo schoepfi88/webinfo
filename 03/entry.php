@@ -19,7 +19,7 @@ include('login.php');
 		</ul>
 	</div>
 
-	<h1>My Blog</h1>
+	<h1 class="header1">My Blog</h1>
 	<br>
 	<br>
 	<?php
@@ -65,7 +65,7 @@ include('login.php');
 
 	<div id="comments" class="comments">
 		<br>
-		<h2> Comments </h2>
+		<h2 class="header2"> Comments </h2>
 		<br>
 		<?php
 		$servername = "localhost";
@@ -87,19 +87,18 @@ include('login.php');
 			$result = $conn->query($sql);
 			
 			while($row = $result->fetch_assoc()){
-				echo "<table class=\"tableHead\">";
+				echo "<table class=\"tableHead\" id=\"commHead".$row["comment_id"]."\">";
 				echo "<tr>";
 				echo "<td class=\"reporter\">".$row["reporter"]."</td>";
 				echo "<td class=\"time\">".$row["created_at"]."</td>";
 				echo "</tr>";
 				echo"</table>";
-				echo"<table class=\"tableBody\">";
+				echo"<table class=\"tableBody\" id=\"commBody".$row["comment_id"]."\">";
 				echo"<tr>";
 				$string =$row["text"];
 				echo"<td class=\"content\">".$string."</td>";
-				echo"<td><button onclick=\"deleteComment(".$row["comment_id"].")\">Delete</button>";
+				echo"<td><button type=\"button\" onclick=\"deleteComment(".$row["comment_id"].")\">Delete</button>";
 				echo"</td></tr></table>";
-				echo "<p>";
 			}
 		}
 		
@@ -121,6 +120,19 @@ include('login.php');
 					<textarea id="textarea" name="content" placeholder="Blog bla bla.." cols="50" rows="5" form="form1"></textarea>
 				</td>
 			</tr>
+			<tr>
+					<td></td>
+					<td>
+						<button class="tags" type="button" onclick="bTag()">bold</button>
+						<button class="tags" type="button" onclick="iTag()">cursiv</button>
+						<button class="tags" type="button" onclick="aTag()">link</button>
+						<button class="tags" type="button" onclick="uTag()">underline</button>
+						<button class="tags" type="button" onclick="fontSizeTag()">font size</button>
+						<button class="tags" type="button" onclick="h1Tag()">h1</button>
+						<button class="tags" type="button" onclick="h2Tag()">h2</button>
+						<button class="tags" type="button" onclick="h3Tag()">h3</button>
+					</td>
+				</tr>
 			<tr>
 				<td></td>
 				<td>

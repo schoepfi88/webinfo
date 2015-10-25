@@ -7,7 +7,7 @@ body {
     padding: 0;
 }
 
-h1 {
+.header1 {
     font-family: Montserrat;
     color: #380B61;
     font-size: 34pt;
@@ -16,7 +16,7 @@ h1 {
     padding: 0;
 }
 
-h2 {
+.header2 {
     font-family: Montserrat;
     color: #380B61;
     font-size: 25pt;
@@ -28,14 +28,19 @@ h2 {
 table {
     font-family: Montserrat;
     width: 80%;
-    color: white;
     border: 4px;
+    color: white;
     border-color: white;
     background-color: white;
     border-style: solid;
     border-spacing: 20px;
     margin-left: 10%;
     opacity: 0.7;
+}
+/* header in entry and comment */
+table < h1, h2 {
+    color: white !important;
+    text-align: left !important;
 }
 
 .tableHead {
@@ -47,6 +52,7 @@ table {
     border-top-width: 0px;
     text-align: left;
     background-color: #380B61;
+    margin-bottom: 10px;
 }
 
 #formtable {
@@ -116,7 +122,7 @@ table {
     margin: auto;
     
 }
-/* only used for comment button */
+
 button {
     background-color: #380B61;
     border: 1pt solid;
@@ -209,6 +215,14 @@ a {
 	font-size: 12px;
 }
 
+.tags {
+    margin: 0;
+    width: 25%;
+    padding-right: 3%;
+    padding-left: 3%;
+    font-size: 8pt !important;
+    float: left;
+}
 
 *::-webkit-input-placeholder {
     font-family: Montserrat;

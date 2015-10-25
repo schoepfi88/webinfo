@@ -13,9 +13,7 @@ function comment () {
 	// Create our XMLHttpRequest object
     var hr = new XMLHttpRequest();
     var url = "comment.php";
-    console.log(url);
-    var vars = "id="+id+"&name="+name+"&text="+text;
-    console.log(vars);
+    var vars = "action=create&id="+id+"&name="+name+"&text="+text;
     hr.open("POST", url, true);
     // Set content type header information for sending url encoded variables in the request
     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -70,5 +68,106 @@ function comment () {
     }
     // Send the data to PHP
     hr.send(vars);
-    
+    clear();
+}
+
+function deleteComment (id) {
+	// Create our XMLHttpRequest object
+    var hr = new XMLHttpRequest();
+    var url = "comment.php";
+    var vars = "action=delete&id="+id;
+    console.log(vars);
+    hr.open("POST", url, true);
+    // Set content type header information for sending url encoded variables in the request
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // Access the onreadystatechange event for the XMLHttpRequest object
+    hr.onreadystatechange = function() {
+	    if(hr.readyState == 4 && hr.status == 200) {
+	    	var response = hr.responseText;
+		    document.getElementById("commHead"+response).style.display = "block";
+		    document.getElementById("commHead"+response).style.lineHeight = 0;
+		    document.getElementById("commHead"+response).style.height = 0;
+		    document.getElementById("commHead"+response).style.overflow = "hidden";
+		    document.getElementById("commHead"+response).style.border = 0;
+		    document.getElementById("commHead"+response).style.margin = 0;
+		    document.getElementById("commBody"+response).style.display = "block";
+		    document.getElementById("commBody"+response).style.lineHeight = 0;
+		    document.getElementById("commBody"+response).style.height = 0;
+		    document.getElementById("commBody"+response).style.overflow = "hidden";
+		    document.getElementById("commBody"+response).style.border = 0;
+		    document.getElementById("commBody"+response).style.margin = 0;
+	    }
+    }
+    // Send the data to PHP
+    hr.send(vars);
+    clear();
+}
+
+function aTag() {
+	var cursorPos = document.getElementById("textarea").selectionStart;
+	var currentValue = document.getElementById("textarea").value;
+	var beforCursor = currentValue.substring(0, cursorPos);
+	var afterCursor = currentValue.substring(cursorPos, currentValue.lenght);
+	document.getElementById("textarea").value = beforCursor + "<a href=\" URL \"> NAME </a>" + afterCursor;
+}
+
+function bTag(){
+	var cursorPos = document.getElementById("textarea").selectionStart;
+	var currentValue = document.getElementById("textarea").value;
+	var beforCursor = currentValue.substring(0, cursorPos);
+	var afterCursor = currentValue.substring(cursorPos, currentValue.lenght);
+	document.getElementById("textarea").value = beforCursor + "<b> TEXT </b>" + afterCursor;
+}
+
+function iTag(){
+	var cursorPos = document.getElementById("textarea").selectionStart;
+	var currentValue = document.getElementById("textarea").value;
+	var beforCursor = currentValue.substring(0, cursorPos);
+	var afterCursor = currentValue.substring(cursorPos, currentValue.lenght);
+	document.getElementById("textarea").value = beforCursor + "<i> TEXT </i>" + afterCursor;
+}
+
+function fontSizeTag(){
+	var cursorPos = document.getElementById("textarea").selectionStart;
+	var currentValue = document.getElementById("textarea").value;
+	var beforCursor = currentValue.substring(0, cursorPos);
+	var afterCursor = currentValue.substring(cursorPos, currentValue.lenght);
+	document.getElementById("textarea").value = beforCursor + "<font size=\"SIZE\"> TEXT </font>" + afterCursor;
+}
+
+function uTag(){
+	var cursorPos = document.getElementById("textarea").selectionStart;
+	var currentValue = document.getElementById("textarea").value;
+	var beforCursor = currentValue.substring(0, cursorPos);
+	var afterCursor = currentValue.substring(cursorPos, currentValue.lenght);
+	document.getElementById("textarea").value = beforCursor + "<u> TEXT </u>" + afterCursor;
+}
+
+function h1Tag(){
+	var cursorPos = document.getElementById("textarea").selectionStart;
+	var currentValue = document.getElementById("textarea").value;
+	var beforCursor = currentValue.substring(0, cursorPos);
+	var afterCursor = currentValue.substring(cursorPos, currentValue.lenght);
+	document.getElementById("textarea").value = beforCursor + "<h1> TEXT </h1>" + afterCursor;
+}
+
+function h2Tag(){
+	var cursorPos = document.getElementById("textarea").selectionStart;
+	var currentValue = document.getElementById("textarea").value;
+	var beforCursor = currentValue.substring(0, cursorPos);
+	var afterCursor = currentValue.substring(cursorPos, currentValue.lenght);
+	document.getElementById("textarea").value = beforCursor + "<h2> TEXT </h2>" + afterCursor;
+}
+
+function h3Tag(){
+	var cursorPos = document.getElementById("textarea").selectionStart;
+	var currentValue = document.getElementById("textarea").value;
+	var beforCursor = currentValue.substring(0, cursorPos);
+	var afterCursor = currentValue.substring(cursorPos, currentValue.lenght);
+	document.getElementById("textarea").value = beforCursor + "<h3> TEXT </h3>" + afterCursor;
+}
+
+function clear() {
+	document.getElementById('name').value="";
+	document.getElementById('textarea').value="";
 }
