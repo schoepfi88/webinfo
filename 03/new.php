@@ -28,7 +28,7 @@
     	$sql = "INSERT INTO entry (session_id, reporter, subject, content) VALUES ('$session_id', '$reporter', '$subject', '$content')";
 	
 		if ($conn->query($sql) === TRUE) {
-			@$error = $error . "New entry created successfully";
+			@$error = "New entry created successfully";
 		} else {
 			$error = "Error: " . $sql . "<br>" . $conn->error;
 		}

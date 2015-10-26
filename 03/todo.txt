@@ -2,3 +2,4 @@
 -hide functionality for specific usergroups
 -about page
 -validation of input fields
+-delete comments of entry after delete entry
