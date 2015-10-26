@@ -1,16 +1,18 @@
 <?php
 include('login.php');
+/*
 if ($_SESSION['loggedin'] == true) {
     echo "Welcome to the member's area, " . $_SESSION['username'] . "!";
     echo "<script> function(); </script>";
 } else {
     echo "Please log in first to see this page.";
 }
+*/
 
 
 $servername = "localhost";
 $username = "root";
-$password = "password";
+$password = "";
 $dbname = "blog";
 
 // Create connection
@@ -32,14 +34,14 @@ if (isset($_POST['submit'])){
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        echo "priviliggg: " . $row["privilege"]."<br>";
+        //echo "priviliggg: " . $row["privilege"]."<br>";
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $reporter;
         $_SESSION['privilege']=$row["privilege"];
       
         
     } else {
-        echo "0 results";
+        //echo "0 results";
     }
 }
 
@@ -69,7 +71,7 @@ header("Refresh");
         <h1 class="header1">Login</h1>
         <br>
         <div id="login_div">
-            HALOOj gkjafjhsjhfsjh f
+            
             <div class="entry">
                 <form class="form1" action="" method="post">
                     <table class="formtable">
@@ -106,16 +108,6 @@ header("Refresh");
             </div>
         </div>
 
-        <div id="testid">
-            BLA BLA SHOW ME
-        </div>
-
     </body>
 
     </html>
-    <script>
-        var x = '<%= Session["loggedin"] %>';
-
-        alert(x);
-        SetDiv();
-    </script>

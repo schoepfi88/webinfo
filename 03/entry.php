@@ -27,7 +27,7 @@ include('login.php');
         <?php
 	$servername = "localhost";
 	$username = "root";
-	$password = "password";
+	$password = "";
 	$dbname = "blog";
 	
 	$session_id = session_id();
@@ -72,7 +72,7 @@ include('login.php');
                 <?php
 		$servername = "localhost";
 		$username = "root";
-		$password = "password";
+		$password = "";
 		$dbname = "blog";
 		
 		$session_id = session_id();
