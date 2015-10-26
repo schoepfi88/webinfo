@@ -1,7 +1,8 @@
 <?php
 include('login.php');
 
-if($_GET['action'] == 'delete') {
+
+if(@$_GET['action'] == 'delete') {
   	$servername = "localhost";
 	$username = "root";
 	$password = "password";
@@ -25,27 +26,30 @@ if($_GET['action'] == 'delete') {
 }
 
 ?>
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>My Blog</title>
-			<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-			<link rel="stylesheet" type="text/css" href="css/theme.css">
-			<script language="javascript" type="text/javascript" src="script/control.js"></script>
-	</head>
-	<body>
-		<div id="menu">
-			<ul>
-				<li><a href="/">Home</a></li>
-				<li><a href="new.php">Create Entry</a></li>
-				<li><a href="/">About</a></li>
-			</ul>
-		</div>
+    <!DOCTYPE html>
+    <html>
 
-		<h1 class="header1">My Blog</h1>
-		<br>
-		<br>
-		<?php
+    <head>
+        <title>My Blog</title>
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="css/theme.css">
+        <script language="javascript" type="text/javascript" src="script/control.js"></script>
+    </head>
+
+    <body>
+        <div id="menu">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="new.php">Create Entry</a></li>
+                <li><a href="/">About</a></li>
+                <li><a href="/loginn.php">Login</a></li>
+            </ul>
+        </div>
+
+        <h1 class="header1">My Blog</h1>
+        <br>
+        <br>
+        <?php
 
 		$servername = "localhost";
 		$username = "root";
@@ -84,5 +88,6 @@ if($_GET['action'] == 'delete') {
 		}
 		$conn->close();
 		?>
-	</body>
-</html>
+    </body>
+
+    </html>

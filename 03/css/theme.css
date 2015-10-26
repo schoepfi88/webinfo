@@ -1,6 +1,6 @@
 body {
-    background-image: url("../images/blog1.png");
-    background-repeat: no-repeat;
+    background-image: url("../images/backgound2.png");
+    background-repeat: repeat;
     background-position: center center;
     background-size: 100%;
     margin: 0;
@@ -9,7 +9,7 @@ body {
 
 .header1 {
     font-family: Montserrat;
-    color: #380B61;
+    color: white;
     font-size: 34pt;
     text-align: center;
     margin: 0;
@@ -37,8 +37,12 @@ table {
     margin-left: 10%;
     opacity: 0.7;
 }
+
+
 /* header in entry and comment */
-table < h1, h2 {
+
+table < h1,
+h2 {
     color: white !important;
     text-align: left !important;
 }
@@ -70,12 +74,12 @@ table < h1, h2 {
 }
 
 .subject {
-	width: 33%;
-	text-align: center;
+    width: 33%;
+    text-align: center;
 }
 
 #menu li {
-    width: 33.3333%;
+    width: 25%;
     float: left;
     font-size: 22px;
     height: 80px;
@@ -120,7 +124,10 @@ table < h1, h2 {
 .comments {
     width: 60%;
     margin: auto;
-    
+}
+
+#login_div {
+    visibility: visible;
 }
 
 button {
@@ -137,7 +144,9 @@ button {
     margin-right: 5px;
 }
 
+
 /* link buttons */
+
 #submit {
     color: #380B61;
     background-color: white;
@@ -151,68 +160,69 @@ button {
 }
 
 #back {
-	float: right;
-	font-family:  Montserrat, 5pt;
-	border: 1pt solid;
-	border-radius: 10px;
-	padding-left: 10%;
-	padding-right: 10%;
-	font-size: 10pt !important;
-	padding-bottom: 1px;
-	padding-top: 1px;
+    float: right;
+    font-family: Montserrat, 5pt;
+    border: 1pt solid;
+    border-radius: 10px;
+    padding-left: 10%;
+    padding-right: 10%;
+    font-size: 10pt !important;
+    padding-bottom: 1px;
+    padding-top: 1px;
 }
 
 #del {
-	float: right;
-	font-family:  Montserrat;
-	border: 1pt solid;
-	border-color: white;
-	color: white;
-	padding-left: 5%;
-	padding-right: 5%;
+    float: right;
+    font-family: Montserrat;
+    border: 1pt solid;
+    border-color: white;
+    color: white;
+    padding-left: 5%;
+    padding-right: 5%;
     padding-bottom: 1px;
     padding-top: 1px;
 }
 
 #more {
-	float: right;
-	font-family:  Montserrat;
-	border: 1pt solid;
-	border-color: white;
-	color: white;
-	padding-left: 5%;
-	padding-right: 5%;
-	margin-right: 2%;
+    float: right;
+    font-family: Montserrat;
+    border: 1pt solid;
+    border-color: white;
+    color: white;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-right: 2%;
     padding-bottom: 1px;
     padding-top: 1px;
 }
+
+
 /* link buttons*/
 
 a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 #textarea {
-	width: 99%;
-	font-family: Montserrat;
+    width: 99%;
+    font-family: Montserrat;
 }
 
 #subject {
-	font-family: Montserrat;
+    font-family: Montserrat;
 }
 
 #name {
-	font-family: Montserrat;
+    font-family: Montserrat;
 }
 
 .content {
-	width: 65%;
+    width: 65%;
 }
 
-
 .feedback {
-	color: black !important;
-	font-size: 12px;
+    color: black !important;
+    font-size: 12px;
 }
 
 .tags {
@@ -231,10 +241,11 @@ a {
 *:-ms-input-placeholder {
     font-family: Montserrat;
 }
+
 *:-moz-placeholder {
-    font-family:  Montserrat;
+    font-family: Montserrat;
 }
 
 *::-moz-placeholder {
-    font-family:  Montserrat;
+    font-family: Montserrat;
 }
