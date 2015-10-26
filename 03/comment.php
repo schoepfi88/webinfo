@@ -1,9 +1,7 @@
 <?php
 	include('parseHtml.php');
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "blog";
+	include('db.php');
+	
 	
 	// Create connection
 	$conn = new mysqli($servername, $username, $password, $dbname);

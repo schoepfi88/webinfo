@@ -34,9 +34,9 @@ bit 1 kommentieren
 bit 2 posten
 bit 3 löschen
 1111 => 15 Admin
-0111 => 7 Author
-0011 => 3 user
-0001 => 1 guest
+0111 => 7 Author	!delete
+0011 => 3 user		!post
+0001 => 1 guest		!comment
 ##################
 Überlege welche verschiedenen Möglichkeiten es zur Umsetzung eines solchen Benutzersystems gibt (etwa: in PHP, direkt im Webserver, ...). Beachte dabei die jeweiligen Vor- bzw. Nachteile der unterschiedlichen Ansätze.
 

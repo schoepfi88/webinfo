@@ -1,10 +1,8 @@
 <?php
 	include('login.php');
 	include('parseHtml.php');
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "blog";
+	include('db.php');
+	
 
 	// Create connection
 	$conn = new mysqli($servername, $username, $password, $dbname);
@@ -28,7 +26,7 @@
     	$sql = "INSERT INTO entry (session_id, reporter, subject, content) VALUES ('$session_id', '$reporter', '$subject', '$content')";
 	
 		if ($conn->query($sql) === TRUE) {
-			@$error = "New entry created successfully";
+			$error = "New entry created successfully";
 		} else {
 			$error = "Error: " . $sql . "<br>" . $conn->error;
 		}
@@ -104,7 +102,7 @@
                         <td></td>
                         <td>
                             <div class="feedback">
-                                <?php echo @$error; ?>
+                                <?php echo $error; ?>
                             </div>
                         </td>
                     </tr>

@@ -1,13 +1,8 @@
 <?php
 include('login.php');
+include('db.php');
 
-
-if(@$_GET['action'] == 'delete') {
-  	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "blog";
-
+if($_GET['action'] == 'delete') {
 	// Create connection
 	$conn = new mysqli($servername, $username, $password, $dbname);
 	// Check connection
@@ -36,9 +31,9 @@ if(@$_GET['action'] == 'delete') {
         <script language="javascript" type="text/javascript" src="script/control.js"></script>
     </head>
 
-    <body>
+    <body onload="hideFunctions()">
         <div id="menu">
-            <ul>
+            <ul id="menubar">
                 <li><a href="/">Home</a></li>
                 <li><a href="new.php">Create Entry</a></li>
                 <li><a href="/">About</a></li>
@@ -51,10 +46,7 @@ if(@$_GET['action'] == 'delete') {
         <br>
         <?php
 
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "blog";
+		include('db.php');
 		$session_id = session_id();
 		
 		// Create connection
@@ -81,7 +73,7 @@ if(@$_GET['action'] == 'delete') {
 			$string =$row["content"];
 			$string = (strlen($string) > 25) ? substr($string,0,20).'...' : $string;
 			echo"<td class=\"content\">".$string."</td>";
-			echo"<td><a id = \"del\" href=\"/index.php?action=delete&index=".$row["entry_id"]."\"> Delete </a>";
+			echo"<td><a id = \"del\" name = \"del\" href=\"/index.php?action=delete&index=".$row["entry_id"]."\"> Delete </a>";
 			echo"<a id = \"more\" href=\"/entry.php?action=more&index=".$row["entry_id"]."\"> More </a>";
 			echo"</td></tr></table>";
 			echo "<p>";

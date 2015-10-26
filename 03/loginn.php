@@ -1,19 +1,6 @@
 <?php
 include('login.php');
-/*
-if ($_SESSION['loggedin'] == true) {
-    echo "Welcome to the member's area, " . $_SESSION['username'] . "!";
-    echo "<script> function(); </script>";
-} else {
-    echo "Please log in first to see this page.";
-}
-*/
-
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "blog";
+include('db.php');
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -22,32 +9,21 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-if (isset($_POST['submit'])){
-    $reporter=$_POST['username'];
+if ($_POST['action'] == 'login'){
+    $reporter=$_POST['user'];
     $password=$_POST['password'];
-
-    echo $reporter;
-    echo $password;
     $sql ="SELECT privilege FROM user WHERE  name='$reporter' AND password='$password'";
-   
-    
+
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        //echo "priviliggg: " . $row["privilege"]."<br>";
-        $_SESSION['loggedin'] = true;
-        $_SESSION['username'] = $reporter;
-        $_SESSION['privilege']=$row["privilege"];
-      
-        
+        echo $row["privilege"];
     } else {
-        //echo "0 results";
+        $error = "login fail";
+        echo 1;
     }
 }
-
-header("Refresh");
 ?>
-
     <!DOCTYPE html>
     <html>
 
@@ -60,7 +36,7 @@ header("Refresh");
 
     <body>
         <div id="menu">
-            <ul>
+            <ul id="menubar">
                 <li><a href="/">Home</a></li>
                 <li><a href="new.php">Create Entry</a></li>
                 <li><a href="/">About</a></li>
@@ -71,35 +47,29 @@ header("Refresh");
         <h1 class="header1">Login</h1>
         <br>
         <div id="login_div">
-            
             <div class="entry">
-                <form class="form1" action="" method="post">
+                <form class="form1">
                     <table class="formtable">
                         <tr>
-                            <td>Username</td>
-                            <td>
-                                <input id="username" name="username" placeholder="username" type="text">
+                            <td style="text-align: center;">
+                                <input id="username" name="username" placeholder="username" type="text" style="width: 20%">
                             </td>
                         </tr>
                         <tr>
-                            <td>Password</td>
-                            <td>
-                                <input id="passwprd" name="password" placeholder="password" type="password">
-                                <td>
+                            <td style="text-align: center;">
+                                <input id="password" name="password" placeholder="password" type="password" style="width: 20%">
+                            </td>
                         </tr>
 
                         <tr>
-                            <td></td>
-                            <td>
-                                <input id="submit" name="submit" type="submit" value="Login">
-
+                            <td style="text-align: center;">
+                                <button onclick="login()" type="button" style="width: 20%; padding-left: 0%; padding-right: 0%; float: none; margin-right: 0;">Login</button>
                             </td>
                         </tr>
                         <tr>
-                            <td></td>
                             <td>
                                 <div class="feedback">
-                                    <?php echo @$error; ?>
+                                    <?php echo $error; ?>
                                 </div>
                             </td>
                         </tr>
