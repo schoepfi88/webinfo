@@ -3,7 +3,7 @@
 	include('parseHtml.php');
 	$servername = "localhost";
 	$username = "root";
-	$password = "password";
+	$password = "";
 	$dbname = "blog";
 
 	// Create connection

@@ -5,7 +5,7 @@ include('login.php');
 if(@$_GET['action'] == 'delete') {
   	$servername = "localhost";
 	$username = "root";
-	$password = "password";
+	$password = "";
 	$dbname = "blog";
 
 	// Create connection
@@ -53,7 +53,7 @@ if(@$_GET['action'] == 'delete') {
 
 		$servername = "localhost";
 		$username = "root";
-		$password = "password";
+		$password = "";
 		$dbname = "blog";
 		$session_id = session_id();
 		

@@ -1,3 +1,17 @@
+var loggedIn =false;
+var userName= "guest";
+var privilege = 1;
+
+function setValues{
+   
+    alert("im in setVAlues");
+    //var myForm = document.getElementById("myForm")
+    //var y = myForm.elements[0].value;
+    //alert(y);
+    return true;
+}
+
+
 function SetDiv(loggedin) {
 
 
