@@ -1,7 +1,5 @@
 <?php
-include('login.php');
 include('db.php');
-
 if($_GET['action'] == 'delete') {
 	// Create connection
 	$conn = new mysqli($servername, $username, $password, $dbname);
@@ -27,17 +25,17 @@ if($_GET['action'] == 'delete') {
     <head>
         <title>My Blog</title>
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" type="text/css" href="css/theme.css">
-        <script language="javascript" type="text/javascript" src="script/control.js"></script>
+        <link rel="stylesheet" type="text/css" href="/css/theme.css">
+        <script language="javascript" type="text/javascript" src="/script/control.js"></script>
     </head>
 
     <body onload="hideFunctions()">
         <div id="menu">
             <ul id="menubar">
                 <li><a href="/">Home</a></li>
-                <li><a href="new.php">Create Entry</a></li>
+                <li><a href="/api/entry/create">Create Entry</a></li>
                 <li><a href="/">About</a></li>
-                <li><a href="/login.php">Login</a></li>
+                <li><a href="/login.html">Login</a></li>
             </ul>
         </div>
 
@@ -47,17 +45,16 @@ if($_GET['action'] == 'delete') {
         <?php
 
 		include('db.php');
-		$session_id = session_id();
 		
 		// Create connection
 		$conn = new mysqli($servername, $username, $password, $dbname);
 		// Check connection
 		if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
+			die("Connection failed: " . $conn->connect_error);
 		} 
 
 		$sql = "SELECT entry_id, reporter, subject, 
-		content,created_at FROM entry WHERE  session_id='$session_id' order by created_at desc";
+		content,created_at FROM entry order by created_at desc";
 		$result = $conn->query($sql);
 
 		while($row = $result->fetch_assoc()){
@@ -73,13 +70,12 @@ if($_GET['action'] == 'delete') {
 			$string =$row["content"];
 			$string = (strlen($string) > 25) ? substr($string,0,20).'...' : $string;
 			echo"<td class=\"content\">".$string."</td>";
-			echo"<td><a id = \"del\" name = \"del\" href=\"/index.php?action=delete&index=".$row["entry_id"]."\"> Delete </a>";
-			echo"<a id = \"more\" href=\"/entry.php?action=more&index=".$row["entry_id"]."\"> More </a>";
+			echo"<td><a id = \"del\" name = \"del\" href=\"/api/entry/delete/".$row["entry_id"]."\"> Delete </a>";
+			echo"<a id = \"more\" href=\"/api/entry/more/".$row["entry_id"]."\"> More </a>";
 			echo"</td></tr></table>";
 			echo "<p>";
 		}
 		$conn->close();
 		?>
     </body>
-
-    </html>
+	</html>

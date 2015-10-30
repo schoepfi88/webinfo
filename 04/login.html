@@ -1,46 +1,19 @@
-<?php
-	session_start();// Starting Session
-	include('db.php');
-
-	// Create connection
-	$conn = new mysqli($servername, $username, $password, $dbname);
-	// Check connection
-	if ($conn->connect_error) {
-		die("Connection failed: " . $conn->connect_error);
-	} 
-
-	if ($_POST['action'] == 'login'){
-		$reporter=$_POST['user'];
-		$password=$_POST['password'];
-		$sql ="SELECT privilege FROM user WHERE  name='$reporter' AND password='$password'";
-
-		$result = $conn->query($sql);
-		if ($result->num_rows > 0) {
-		$row = $result->fetch_assoc();
-		echo $row["privilege"];
-		} else {
-			$error = "login fail";
-			echo 1;
-		}
-	}
-?>
 <!DOCTYPE html>
 <html>
 
 	<head>
 		<title>My Blog</title>
 		<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="css/theme.css">
-		<script language="javascript" type="text/javascript" src="script/control.js"></script>
+		<link rel="stylesheet" type="text/css" href="/css/theme.css">
+		<script language="javascript" type="text/javascript" src="/script/control.js"></script>
 	</head>
 
 	<body>
 		<div id="menu">
 			<ul id="menubar">
-				<li><a href="/">Home</a></li>
-				<li><a href="new.php">Create Entry</a></li>
-				<li><a href="/">About</a></li>
-				<li><a href="/login.php">Login</a></li>
+				<li style="width:33%"><a href="/">Home</a></li>
+				<li style="width:33%"><a href="/">About</a></li>
+				<li style="width:34%"><a href="/login.html">Login</a></li>
 			</ul>
 		</div>
 

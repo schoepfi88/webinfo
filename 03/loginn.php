@@ -79,5 +79,4 @@ if ($_POST['action'] == 'login'){
         </div>
 
     </body>
-
-    </html>
+</html>

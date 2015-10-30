@@ -1,8 +1,7 @@
 <?php
-	include('login.php');
 	include('parseHtml.php');
 	include('db.php');
-	
+	include('checkPrivileges.php');
 
 	// Create connection
 	$conn = new mysqli($servername, $username, $password, $dbname);
@@ -21,15 +20,18 @@
 		$subject = eliminateHtml($subject);
 		// parse content part
 		$content = parseContent($content);
-
-
-    	$sql = "INSERT INTO entry (session_id, reporter, subject, content) VALUES ('$session_id', '$reporter', '$subject', '$content')";
-	
-		if ($conn->query($sql) === TRUE) {
-			$error = "New entry created successfully";
-		} else {
-			$error = "Error: " . $sql . "<br>" . $conn->error;
-		}
+        // check if privileges are correct
+        /*if (isset($_COOKIE['login'])){
+            if (checkPriv($_COOKIE['login'])){*/
+            	$sql = "INSERT INTO entry (session_id, reporter, subject, content) VALUES ('$session_id', '$reporter', '$subject', '$content')";
+        	
+        		if ($conn->query($sql) === TRUE) {
+        			$error = "New entry created successfully";
+        		} else {
+        			$error = "Error: " . $sql . "<br>" . $conn->error;
+        		}
+            /*}
+        }*/
 	}
 	$conn->close();
 ?>
@@ -40,17 +42,17 @@
     <head>
         <title>My Blog</title>
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" type="text/css" href="css/theme.css">
-        <script language="javascript" type="text/javascript" src="script/control.js"></script>
+        <link rel="stylesheet" type="text/css" href="/css/theme.css">
+        <script language="javascript" type="text/javascript" src="/script/control.js"></script>
     </head>
 
     <body>
         <div id="menu">
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="new.php">Create Entry</a></li>
+                <li><a href="/api/entry/create">Create Entry</a></li>
                 <li><a href="/">About</a></li>
-                <li><a href="/login.php">Login</a></li>
+                <li><a href="/login.html">Login</a></li>
             </ul>
         </div>
 

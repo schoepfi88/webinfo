@@ -1,5 +1,4 @@
 function hideFunctions(){
-	console.log("hide");
 	var priv = readCookie('login');
 	if (priv == null){
 		priv = 1;
@@ -16,7 +15,7 @@ function hideFunctions(){
 	if (priv > 6){
 		var menubar = document.getElementById("menubar");
 		menubar.innerHTML = "<li><a href=\"/\">Home</a></li>" +
-		"<li><a href=\"new.php\">Create Entry</a></li>" +
+		"<li><a href=\"/api/entry/create\">Create Entry</a></li>" +
 		"<li><a href=\"/\">About</a></li>" +
 		"<li><a onclick=\"logout()\">Logout</a></li>";
 	}
@@ -39,10 +38,16 @@ function hideFunctions(){
 		var menubar = document.getElementById("menubar");
 		menubar.innerHTML = "<li style=\"width: 33%\"><a href=\"/\">Home</a></li>" +
 		"<li style=\"width: 33%\"><a href=\"/\">About</a></li>" +
-		"<li style=\"width: 34%\"><a href=\"/login.php\">Login</a></li>";
+		"<li style=\"width: 34%\"><a href=\"/login.html\">Login</a></li>";
 	}
-
-
+    // create comment url is api/entry/more/id/create
+    if (location.href.toString().indexOf("create") > -1 && location.href.toString().indexOf("more") > -1){
+        window.location.hash = "comment";
+        document.getElementById('comment').style.visibility = 'visible';
+    }
+    if (location.href.toString().indexOf("comments") > -1){
+        window.location.hash = "comments";
+    }
 }
 
 function login(){
@@ -50,21 +55,22 @@ function login(){
 	var pw = document.getElementById('password').value;
     var hr = new XMLHttpRequest();
 	var url = "login.php";
-    var vars = "action=login&user=" + user + "&password=" + pw;
-    hr.open("POST", url, true);
+    var vars = {};
+    vars["user"] = user;
+    vars["password"] = pw;
+    hr.open("POST", url);
     // Set content type header information for sending url encoded variables in the request
-    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    hr.setRequestHeader("Content-Type", "application/json");
     // Access the onreadystatechange event for the XMLHttpRequest object
     hr.onreadystatechange = function () {
 		if (hr.readyState == 4 && hr.status == 200) {
-			var privilege = parseInt(hr.responseText);
-			console.log(privilege);
+            var privilege = JSON.parse(hr.response)["priv"];
 			createCookie('login', privilege, 30);
 			location.href = "index.php";
 		}
 	}
-    hr.send(vars);
-
+    hr.send(JSON.stringify(vars));
+    //hr.send(vars);
 }
 
 function createCookie(name,priv,days) {
@@ -95,21 +101,24 @@ function readCookie(name) {
     return null;
 }
 
-function toggleVisibility() {
+function toggleVisibility(id) {
     var commentDiv = document.getElementById('comment');
     if (commentDiv.style.visibility == 'visible')
         commentDiv.style.visibility = 'hidden';
-    else
+    else {
         commentDiv.style.visibility = 'visible';
+        window.location.hash = "comment";
+    }
 }
 
 function comment() {
     var name = document.getElementById('name').value;
     var text = document.getElementById('textarea').value;
-    var id = document.location.href.toString().split("&")[1].split("=")[1]; // parse index from url 
+    var id = document.location.href.toString().split("/")[6]; // parse index from url 
+    console.log(id);
     // Create our XMLHttpRequest object
     var hr = new XMLHttpRequest();
-    var url = "comment.php";
+    var url = "/comment.php";
     var vars = "action=create&id=" + id + "&name=" + name + "&text=" + text;
     hr.open("POST", url, true);
     // Set content type header information for sending url encoded variables in the request
@@ -118,54 +127,56 @@ function comment() {
     hr.onreadystatechange = function () {
             if (hr.readyState == 4 && hr.status == 200) {
                 var return_data = hr.responseText;
-                console.log(return_data);
-                // parse response
-                var comment_id = return_data.split("#?#")[0];
-                var reporter = return_data.split("#?#")[1];
-                var time = return_data.split("#?#")[3];
-                var text = return_data.split("#?#")[2];
+                if (return_data != "405"){
+                    console.log(return_data);
+                    // parse response
+                    var comment_id = return_data.split("#?#")[0];
+                    var reporter = return_data.split("#?#")[1];
+                    var time = return_data.split("#?#")[3];
+                    var text = return_data.split("#?#")[2];
 
 
-                // head
-                var table = document.createElement("TABLE");
-                table.setAttribute("class", "tableHead");
-                table.setAttribute("id", "commHead" + comment_id);
-                var tr = document.createElement("TR");
-                var td1 = document.createElement("TD");
-                var td2 = document.createElement("TD");
-                td1.setAttribute("class", "reporter");
-                td2.setAttribute("class", "time");
-                td1.innerHTML = reporter;
-                td2.innerHTML = time;
-                tr.appendChild(td1);
-                tr.appendChild(td2);
-                table.appendChild(tr);
-                document.getElementById('comments').appendChild(table);
+                    // head
+                    var table = document.createElement("TABLE");
+                    table.setAttribute("class", "tableHead");
+                    table.setAttribute("id", "commHead" + comment_id);
+                    var tr = document.createElement("TR");
+                    var td1 = document.createElement("TD");
+                    var td2 = document.createElement("TD");
+                    td1.setAttribute("class", "reporter");
+                    td2.setAttribute("class", "time");
+                    td1.innerHTML = reporter;
+                    td2.innerHTML = time;
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                    table.appendChild(tr);
+                    document.getElementById('comments').appendChild(table);
 
-                // body
-                table = document.createElement("TABLE");
-                table.setAttribute("class", "tableBody");
-                table.setAttribute("id", "commBody" + comment_id);
-                tr = document.createElement("TR");
-                td1 = document.createElement("TD");
-                td2 = document.createElement("TD");
-                td1.setAttribute("class", "content");
-                td1.innerHTML = text;
-                var delButton = document.createElement("BUTTON");
-                delButton.setAttribute("onclick", "deleteComment("+comment_id+")");
-                delButton.setAttribute("type", "button");
-                delButton.setAttribute("name", "del");
-                delButton.innerHTML = "Delete";
-                td2.appendChild(delButton);
-                tr.appendChild(td1);
-                tr.appendChild(td2);
-                table.appendChild(tr);
-                document.getElementById('comments').appendChild(table);
+                    // body
+                    table = document.createElement("TABLE");
+                    table.setAttribute("class", "tableBody");
+                    table.setAttribute("id", "commBody" + comment_id);
+                    tr = document.createElement("TR");
+                    td1 = document.createElement("TD");
+                    td2 = document.createElement("TD");
+                    td1.setAttribute("class", "content");
+                    td1.innerHTML = text;
+                    var delButton = document.createElement("BUTTON");
+                    delButton.setAttribute("onclick", "deleteComment("+comment_id+")");
+                    delButton.setAttribute("type", "button");
+                    delButton.setAttribute("name", "del");
+                    delButton.innerHTML = "Delete";
+                    td2.appendChild(delButton);
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                    table.appendChild(tr);
+                    document.getElementById('comments').appendChild(table);
 
-                // br
-                var br = document.createElement("BR");
-                document.getElementById('comments').appendChild(br);
-                hideFunctions();
+                    // br
+                    var br = document.createElement("BR");
+                    document.getElementById('comments').appendChild(br);
+                    hideFunctions();
+                }
             }
         }
         // Send the data to PHP
@@ -176,22 +187,23 @@ function comment() {
 function deleteComment(id) {
     // Create our XMLHttpRequest object
     var hr = new XMLHttpRequest();
-    var url = "comment.php";
-    var vars = "action=delete&id=" + id;
+    var url = "/comment.php";
+    var vars = "?action=delete&id=" + id;
     console.log(vars);
-    hr.open("POST", url, true);
+    hr.open("GET", url+vars, true);
     // Set content type header information for sending url encoded variables in the request
     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     // Access the onreadystatechange event for the XMLHttpRequest object
     hr.onreadystatechange = function () {
             if (hr.readyState == 4 && hr.status == 200) {
-                var response = hr.responseText;
+                var response = hr.responseText.split("ID: ")[1];
+                response = parseInt(response);
                 hideElement(document.getElementById("commHead" + response));
                 hideElement(document.getElementById("commBody" + response));
             }
         }
-        // Send the data to PHP
-    hr.send(vars);
+    // Send the data to PHP
+    hr.send("");
     clear();
 }
 
@@ -265,14 +277,16 @@ function clear() {
 }
 
 function hideElement(elem){
-	elem.style.display = "block";
-    elem.style.lineHeight = 0;
-    elem.style.height = 0;
-    elem.style.overflow = "hidden";
-    elem.style.border = 0;
-    elem.style.margin = 0;
-    elem.style.width = 0;
-    elem.style.padding = 0;
+    if (elem != null){
+    	elem.style.display = "block";
+        elem.style.lineHeight = 0;
+        elem.style.height = 0;
+        elem.style.overflow = "hidden";
+        elem.style.border = 0;
+        elem.style.margin = 0;
+        elem.style.width = 0;
+        elem.style.padding = 0;
+    }
 }
 
 function logout(){
