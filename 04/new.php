@@ -21,17 +21,34 @@
 		// parse content part
 		$content = parseContent($content);
         // check if privileges are correct
-        /*if (isset($_COOKIE['login'])){
-            if (checkPriv($_COOKIE['login'])){*/
+        if (isset($_COOKIE['login'])){
+            $priv = $_COOKIE['login'];
+        } else {
+            $priv = "0";
+        }
+        if (isset($_COOKIE["PHPSESSID"])){
+            $sessionid = $_COOKIE["PHPSESSID"];
+        } else {
+            $sessionid = "0";
+        }
+        $sqlcheck = "SELECT priv FROM authorize WHERE session_id ='$sessionid' AND priv = '$priv'";
+        $resultcheck = $conn->query($sqlcheck);
+        $rowcheck = $resultcheck->fetch_assoc();
+        if ($resultcheck->num_rows > 0){
+            // priv must be greater than 6
+            if ($rowcheck['priv'] > 6){
             	$sql = "INSERT INTO entry (session_id, reporter, subject, content) VALUES ('$session_id', '$reporter', '$subject', '$content')";
-        	
         		if ($conn->query($sql) === TRUE) {
         			$error = "New entry created successfully";
         		} else {
         			$error = "Error: " . $sql . "<br>" . $conn->error;
         		}
-            /*}
-        }*/
+            } else {
+                $error = "Error: Entry not created - Privileges are insufficient";
+            }
+        } else {
+            $error = "Error: Entry not created - Privileges are insufficient";
+        }
 	}
 	$conn->close();
 ?>

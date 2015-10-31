@@ -1,5 +1,5 @@
 body {
-    background-image: url("../images/blog2.jpg");
+    background-image: url("../images/blog6.jpg");
     background-repeat: repeat;
     background-position: center center;
     background-size: 100%;
@@ -221,8 +221,9 @@ a {
 }
 
 .feedback {
-    color: black !important;
+    color: #380B61 !important;
     font-size: 12px;
+    font-family: Montserrat;
 }
 
 .tags {

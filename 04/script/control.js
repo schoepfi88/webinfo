@@ -176,6 +176,9 @@ function comment() {
                     var br = document.createElement("BR");
                     document.getElementById('comments').appendChild(br);
                     hideFunctions();
+                    document.getElementById("feed").innerHTML = "Comment successfully created";
+                } else {
+                    document.getElementById("feed").innerHTML = "Error: Comment not created - Privileges are insufficient";
                 }
             }
         }
@@ -196,10 +199,12 @@ function deleteComment(id) {
     // Access the onreadystatechange event for the XMLHttpRequest object
     hr.onreadystatechange = function () {
             if (hr.readyState == 4 && hr.status == 200) {
-                var response = hr.responseText.split("ID: ")[1];
+                var text = hr.responseText;
+                var response = hr.responseText.split("ID: '")[1];
                 response = parseInt(response);
                 hideElement(document.getElementById("commHead" + response));
                 hideElement(document.getElementById("commBody" + response));
+                document.getElementById('feed').innerHTML = text;
             }
         }
     // Send the data to PHP

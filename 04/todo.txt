@@ -1,5 +1,4 @@
 C
-- check authorization before creating an entry
 - implement rest api for changing comment and changing entry
 
 B

@@ -1,7 +1,6 @@
 <?php
 	include('parseHtml.php');
 	include('db.php');
-	include('checkPrivileges.php');
 	
 	// Create connection
 	$conn = new mysqli($servername, $username, $password, $dbname);
@@ -23,7 +22,7 @@
 	$sqlcheck = "SELECT priv FROM authorize WHERE session_id ='$sessionid' AND priv = '$priv'";
 	$resultcheck = $conn->query($sqlcheck);
 	$rowcheck = $resultcheck->fetch_assoc();
-	if ($resultcheck->num_rows > 0){
+	if ($resultcheck->num_rows > 0){ 
 		// priv must be greater than 2
 		if ($rowcheck['priv'] > 2){
 			if ($_POST['action'] == "create"){
@@ -46,7 +45,8 @@
 				echo $response;
 			}
 		} else {
-			echo "405";
+			echo "<br><link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+        <link rel='stylesheet' type='text/css' href='/css/theme.css'><div style='text-align: center' class='feedback'>Error: Comment not created - Privileges are insufficient</div>";
 		}
 		
 		// priv must be greater than 7
@@ -55,11 +55,16 @@
 				$id = $_GET['id'];
 				$sql = "DELETE from comment WHERE comment_id = '$id'";
 				$result = $conn->query($sql);
-				echo "Comment with ID: ".$id." successfully deleted";
+				echo "<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+        <link rel='stylesheet' type='text/css' href='/css/theme.css'><div style='text-align: center' class='feedback'>Comment with ID: '$id' successfully deleted</div>";
 			}
 		} else {
-			echo "405";
+			echo "<br><link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+        <link rel='stylesheet' type='text/css' href='/css/theme.css'><div style='text-align: center' class='feedback'>Error: Comment not deleted - Privileges are insufficient</div>";
 		}
+	} else {
+		echo "<br><link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+        <link rel='stylesheet' type='text/css' href='/css/theme.css'><div style='text-align: center' class='feedback'>Error: Privileges are insufficient</div>";
 	}
 
 	$conn->close();

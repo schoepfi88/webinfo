@@ -22,8 +22,6 @@
         <br>
         <?php
 		include('db.php');
-		
-		
 		$session_id = session_id();
 		
 		// Create connection
@@ -74,7 +72,9 @@
 			if($_GET['action'] == 'more') {
                 echo "<br>";
                 echo "<h2 class=\"header2\"> Comments </h2>";
-                echo "<br>";    
+                echo "<br>";
+                echo "<div class='feedback' id='feed' style='text-align: center'></div>";
+                echo "<br>";
 				$sql = "SELECT comment_id, reporter, text, created_at FROM comment WHERE entry_id=".$_GET['index']; 
 				$result = $conn->query($sql);
 				
@@ -135,9 +135,7 @@
                 <tr>
                     <td></td>
                     <td>
-                        <div class="feedback">
-                            <?php echo $error; ?>
-                        </div>
+                        <div id="feed" class="feedback"></div>
                     </td>
                 </tr>
             </table>

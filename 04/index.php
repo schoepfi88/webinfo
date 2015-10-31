@@ -7,14 +7,37 @@ if($_GET['action'] == 'delete') {
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
 	}
-	
-	$sql = "DELETE FROM entry WHERE entry_id = ".$_GET['index'];
-	
-	if ($conn->query($sql) === TRUE) {
-		$error = "Entry deleted successfully";
-			
+
+	if (isset($_COOKIE['login'])){
+		$priv = $_COOKIE['login'];
 	} else {
-		$error = "Error: " . $sql . "<br>" . $conn->error;
+		$priv = "0";
+	}
+	if (isset($_COOKIE["PHPSESSID"])){
+		$sessionid = $_COOKIE["PHPSESSID"];
+	} else {
+		$sessionid = "0";
+	}
+
+	$sqlcheck = "SELECT priv FROM authorize WHERE session_id ='$sessionid' AND priv = '$priv'";
+	$resultcheck = $conn->query($sqlcheck);
+	$rowcheck = $resultcheck->fetch_assoc();
+	if ($resultcheck->num_rows > 0){
+        // priv must be greater than 7
+        if ($rowcheck['priv'] > 7){
+			$sql = "DELETE FROM entry WHERE entry_id = ".$_GET['index'];
+			
+			if ($conn->query($sql) === TRUE) {
+				$error = "Entry deleted successfully";
+					
+			} else {
+				$error = "Error: " . $sql . "<br>" . $conn->error;
+			}
+		} else {
+			$error = "Error: Entry not deleted - Privileges are insufficient";
+		}
+	} else {
+		$error = "Error: Entry not deleted - Privileges are insufficient";
 	}
 }
 
@@ -41,6 +64,7 @@ if($_GET['action'] == 'delete') {
 
         <h1 class="header1">My Blog</h1>
         <br>
+        <div class="feedback" id="feed" style="text-align: center;"><?php echo $error;?></div>
         <br>
         <?php
 
