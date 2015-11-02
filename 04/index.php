@@ -1,6 +1,8 @@
 <?php
 include('db.php');
-if($_GET['action'] == 'delete') {
+$error ="";
+$isSearch = false;
+if(@$_GET['action'] == 'delete') {
 	// Create connection
 	$conn = new mysqli($servername, $username, $password, $dbname);
 	// Check connection
@@ -41,12 +43,29 @@ if($_GET['action'] == 'delete') {
 	}
 }
 
+
+
+if (isset($_POST['submit'])){
+    
+    
+    $keyword=$_POST['search'];
+    $isSearch=true;
+
+    
+    header("url=index.php");
+
+}
+
+
+
+
 ?>
     <!DOCTYPE html>
     <html>
 
     <head>
         <title>My Blog</title>
+
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="/css/theme.css">
         <script language="javascript" type="text/javascript" src="/script/control.js"></script>
@@ -56,17 +75,32 @@ if($_GET['action'] == 'delete') {
         <div id="menu">
             <ul id="menubar">
                 <li><a href="/">Home</a></li>
-                <li><a href="/api/entry/create">Create Entry</a></li>
+                <li><a href="/new.php">Create Entry</a></li>
                 <li><a href="/">About</a></li>
                 <li><a href="/login.html">Login</a></li>
             </ul>
         </div>
-
-        <h1 class="header1">My Blog</h1>
-        <br>
-        <div class="feedback" id="feed" style="text-align: center;"><?php echo $error;?></div>
-        <br>
         <?php
+        
+        if($isSearch == false){
+            echo "<h1 class=\"header1\">My Blog</h1>";
+        }else{
+           echo "<h1 class=\"header1\">Search:$keyword</h1>";
+        }
+        
+        ?>
+
+            <br>
+            <form id="searchForm" method="post">
+                <input class="subject" name="search" type="text" placeholder="Keyword.." required>
+                <input id="submit" name="submit" type="submit" value="Search">
+
+            </form>
+            <div class="feedback" id="feed" style="text-align: center;">
+                <?php echo $error;?>
+            </div>
+            <br>
+            <?php
 
 		include('db.php');
 		
@@ -76,9 +110,15 @@ if($_GET['action'] == 'delete') {
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
 		} 
-
-		$sql = "SELECT entry_id, reporter, subject, 
-		content,created_at FROM entry order by created_at desc";
+        if($isSearch == false){
+            $sql = "SELECT entry_id, reporter, subject, 
+		content, keyword, created_at FROM entry order by created_at desc";
+        }else{
+            $sql =  "SELECT entry_id, reporter, subject, content, keyword, created_at FROM entry WHERE keyword = '$keyword' order by created_at desc";
+        }
+    
+        
+		
 		$result = $conn->query($sql);
 
 		while($row = $result->fetch_assoc()){
@@ -94,7 +134,8 @@ if($_GET['action'] == 'delete') {
 			$string =$row["content"];
 			$string = (strlen($string) > 25) ? substr($string,0,20).'...' : $string;
 			echo"<td class=\"content\">".$string."</td>";
-			echo"<td><a id = \"del\" name = \"del\" href=\"/api/entry/delete/".$row["entry_id"]."\"> Delete </a>";
+            echo"<td>#".$row["keyword"]."</td>";
+			echo"<td><a class = \"del\" name = \"del\" href=\"/api/entry/delete/".$row["entry_id"]."\"> Delete </a>";
 			echo"<a id = \"more\" href=\"/api/entry/more/".$row["entry_id"]."\"> More </a>";
 			echo"</td></tr></table>";
 			echo "<p>";
@@ -102,4 +143,5 @@ if($_GET['action'] == 'delete') {
 		$conn->close();
 		?>
     </body>
-	</html>
+
+    </html>

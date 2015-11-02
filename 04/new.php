@@ -1,23 +1,54 @@
 <?php
 	include('parseHtml.php');
 	include('db.php');
-	include('checkPrivileges.php');
+	//include('checkPrivileges.php');
 
+
+
+    @$foo="Search";
+    $change = false;
 	// Create connection
 	$conn = new mysqli($servername, $username, $password, $dbname);
 	// Check connection
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
 	} 
-	if (isset($_POST['submit'])){
+	
+$usr = "";
+$subj ="";
+$keyw ="";
+$cont ="";
+
+
+    if(@$_GET['action'] == 'change') {
+       
+        $change = true;
+        $sql =  "SELECT entry_id, reporter, subject, content, keyword, created_at FROM entry WHERE entry_id = ".$_GET['index'];
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        
+        $usr = $row["reporter"];
+        $subj =$row["subject"];
+        $keyw =$row["keyword"];
+        $cont =$row["content"];
+        $foo ="Change";
+        
+        
+        
+    }
+
+
+    if (isset($_POST['submit'])){
 		$reporter=$_POST['username'];
 		$subject=$_POST['subject'];
 		$content=$_POST['content'];
+        $keyword=$_POST['keyword'];
 		$session_id = session_id();
 
 		// replace < and > in reporter and subject
 		$reporter = eliminateHtml($reporter);
 		$subject = eliminateHtml($subject);
+        $keyword = eliminateHtml($keyword);
 		// parse content part
 		$content = parseContent($content);
         // check if privileges are correct
@@ -34,10 +65,13 @@
         $sqlcheck = "SELECT priv FROM authorize WHERE session_id ='$sessionid' AND priv = '$priv'";
         $resultcheck = $conn->query($sqlcheck);
         $rowcheck = $resultcheck->fetch_assoc();
+        if($change == false){
         if ($resultcheck->num_rows > 0){
             // priv must be greater than 6
             if ($rowcheck['priv'] > 6){
-            	$sql = "INSERT INTO entry (session_id, reporter, subject, content) VALUES ('$session_id', '$reporter', '$subject', '$content')";
+            	
+                
+                $sql = "INSERT INTO entry (session_id, reporter, subject, keyword, content) VALUES ('$session_id', '$reporter', '$subject', '$keyword', '$content')";
         		if ($conn->query($sql) === TRUE) {
         			$error = "New entry created successfully";
         		} else {
@@ -48,8 +82,14 @@
             }
         } else {
             $error = "Error: Entry not created - Privileges are insufficient";
+        }}else{
+            $sql = "UPDATE entry SET session_id = '$session_id', reporter = '$reporter', subject = '$subject', keyword = '$keyword',content = '$content' WHERE entry_id= ".$_GET['index'];
+            if ($conn->query($sql) === TRUE) {
+                $error = "Entry updated successfully";
+        
+        
         }
-	}
+	}}
 	$conn->close();
 ?>
 
@@ -81,20 +121,25 @@
                     <tr>
                         <td>User</td>
                         <td>
-                            <input id="name" name="username" placeholder="username" type="text">
+                            <input class="nameForm" name="username" placeholder="username" type="text" value="<?php echo $usr; ?>">
                         </td>
                     </tr>
                     <tr>
                         <td>Subject</td>
                         <td>
-                            <input id="subject" name="subject" placeholder="subject" type="text">
+                            <input class="subjectForm" name="subject" placeholder="subject" type="text" value="<?php echo $subj; ?>">
+                            <td>
+                    </tr>
+                    <tr>
+                        <td>Keyword</td>
+                        <td>
+                            <input class="subjectForm" name="keyword" placeholder="keyword" type="text" value="<?php echo $keyw; ?>">
                             <td>
                     </tr>
                     <tr>
                         <td>Content</td>
                         <td>
-                            <textarea id="textarea" name="content" placeholder="Blog bla bla.." cols="50" rows="10" form="form1"></textarea>
-                        </td>
+                            <textarea id="textarea" name="content" placeholder="Type your text..." cols="50" rows="10" form="form1"><?php echo $cont;?></textarea>
                     </tr>
                     <tr>
                         <td></td>
@@ -112,7 +157,7 @@
                     <tr>
                         <td></td>
                         <td>
-                            <input id="submit" name="submit" type="submit" value="Create">
+                            <input id="submit" name="submit" type="submit" value="<?php echo $foo ?>">
                             <a id="back" href="/">Back</a>
                         </td>
                     </tr>

@@ -64,6 +64,14 @@ h2 {
     align-self: center;
 }
 
+#searchForm {
+    text-align: center;
+}
+
+.keyword {
+    color: white;
+}
+
 .time {
     text-align: right;
     width: 33%;
@@ -171,7 +179,7 @@ button {
     padding-top: 1px;
 }
 
-#del {
+.del {
     float: right;
     font-family: Montserrat;
     border: 1pt solid;
@@ -208,12 +216,14 @@ a {
     font-family: Montserrat;
 }
 
-#subject {
+#subjectForm {
     font-family: Montserrat;
+    width: 33%;
 }
 
-#name {
+.nameForm {
     font-family: Montserrat;
+    width: 33%;
 }
 
 .content {

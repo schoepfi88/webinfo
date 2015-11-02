@@ -1,26 +1,28 @@
+
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>My Blog</title>
-        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" type="text/css" href="/css/theme.css">
-        <script language="javascript" type="text/javascript" src="/script/control.js"></script>
-    </head>
 
-    <body onload="hideFunctions()">
-        <div id="menu">
-            <ul id="menubar">
-                <li><a href="/">Home</a></li>
-                <li><a href="/api/entry/create">Create Entry</a></li>
-                <li><a href="/">About</a></li>
-                <li><a href="/login.html">Login</a></li>
-            </ul>
-        </div>
+<head>
+    <title>My Blog</title>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/css/theme.css">
+    <script language="javascript" type="text/javascript" src="/script/control.js"></script>
+</head>
 
-        <h1 class="header1">My Blog</h1>
-        <br>
-        <br>
-        <?php
+<body onload="hideFunctions()">
+    <div id="menu">
+        <ul id="menubar">
+            <li><a href="/">Home</a></li>
+            <li><a href="/api/entry/create">Create Entry</a></li>
+            <li><a href="/">About</a></li>
+            <li><a href="/login.html">Login</a></li>
+        </ul>
+    </div>
+
+    <h1 class="header1">My Blog</h1>
+    <br>
+    <br>
+    <?php
 		include('db.php');
 		$session_id = session_id();
 		
@@ -47,7 +49,8 @@
 				echo"<tr>";
 				$string =$row["content"];
 				echo"<td class=\"content\">".$string."</td>";
-				echo"<td><a id = \"del\" name=\"del\" href=\"/index.php?action=delete&index=".$row["entry_id"]."\"> Delete </a>";
+                echo"<td><a class = \"del\" name=\"change\" href=\"/new.php?action=change&index=".$row["entry_id"]."\"> Change </a>";
+                echo"<a class = \"del\" name=\"del\" href=\"/index.php?action=delete&index=".$row["entry_id"]."\"> Delete </a>";
 				echo"<button id=\"toggle\" type=\"button\" onclick=\"toggleVisibility(".$row["entry_id"].")\"> Comment </button>";
 				echo"</tr></table>";
 				echo "<p>";
@@ -140,5 +143,6 @@
                 </tr>
             </table>
         </div>
-    </body>
+</body>
+
 </html>
