@@ -5,5 +5,5 @@
  - Abrufen aller Kommentare zu einem Blog-Eintrag			localhost/api/entry/more/id/comments			DONE
  - Anlegen eines neuen Kommentars zu einem Blog-Eintrag		localhost/api/entry/more/id/create				DONE
  - Löschen eines Kommentares								localhost/api/entry/more/id/delete/id			DONE
- - Verändern eines Kommentars								localhost/api/entry/more/id/change/id			/ TODO
+ - Verändern eines Kommentars								localhost/api/entry/more/id/change/id			TODO
  - Nach Keyword suchen                                                                                      DONE
