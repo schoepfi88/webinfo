@@ -43,21 +43,11 @@ if(@$_GET['action'] == 'delete') {
 	}
 }
 
-
-
 if (isset($_POST['submit'])){
-    
-    
     $keyword=$_POST['search'];
     $isSearch=true;
-
-    
     header("url=index.php");
-
 }
-
-
-
 
 ?>
     <!DOCTYPE html>
@@ -81,7 +71,6 @@ if (isset($_POST['submit'])){
             </ul>
         </div>
         <?php
-        
         if($isSearch == false){
             echo "<h1 class=\"header1\">My Blog</h1>";
         }else{
@@ -91,14 +80,17 @@ if (isset($_POST['submit'])){
         ?>
 
             <br>
+            <br>
             <form id="searchForm" method="post">
                 <input class="subject" name="search" type="text" placeholder="Keyword.." required>
                 <input id="submit" name="submit" type="submit" value="Search">
 
             </form>
+            <br>
             <div class="feedback" id="feed" style="text-align: center;">
                 <?php echo $error;?>
             </div>
+            <br>
             <br>
             <?php
 

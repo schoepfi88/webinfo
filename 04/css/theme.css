@@ -149,7 +149,7 @@ button {
     padding-right: 10%;
     font-size: 12pt !important;
     float: right;
-    margin-right: 5px;
+    //margin-right: 5px;
 }
 
 
@@ -189,6 +189,7 @@ button {
     padding-right: 5%;
     padding-bottom: 1px;
     padding-top: 1px;
+    margin-left: 2%;
 }
 
 #more {
@@ -199,7 +200,6 @@ button {
     color: white;
     padding-left: 5%;
     padding-right: 5%;
-    margin-right: 2%;
     padding-bottom: 1px;
     padding-top: 1px;
 }
@@ -216,7 +216,7 @@ a {
     font-family: Montserrat;
 }
 
-#subjectForm {
+.subjectForm {
     font-family: Montserrat;
     width: 33%;
 }
@@ -227,7 +227,7 @@ a {
 }
 
 .content {
-    width: 65%;
+    width: 55%;
 }
 
 .feedback {

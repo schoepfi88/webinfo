@@ -49,8 +49,8 @@
 				echo"<tr>";
 				$string =$row["content"];
 				echo"<td class=\"content\">".$string."</td>";
-                echo"<td><a class = \"del\" name=\"del\" href=\"/new.php?action=change&index=".$row["entry_id"]."\"> Change </a>";
-                echo"<a class = \"del\" name=\"del\" href=\"/index.php?action=delete&index=".$row["entry_id"]."\"> Delete </a>";
+                echo"<td><a class = \"del\" name=\"del\" href=\"/api/entry/change/".$row["entry_id"]."\"> Change </a>";
+                echo"<a class = \"del\" name=\"del\" href=\"/api/entry/delete/".$row["entry_id"]."\"> Delete </a>";
 				echo"<button id=\"toggle\" type=\"button\" onclick=\"toggleVisibility(".$row["entry_id"].")\"> Comment </button>";
 				echo"</tr></table>";
 				echo "<p>";

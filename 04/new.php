@@ -1,11 +1,8 @@
 <?php
 	include('parseHtml.php');
 	include('db.php');
-	//include('checkPrivileges.php');
 
-
-
-    @$foo="Search";
+    @$foo="Create";
     $change = false;
 	// Create connection
 	$conn = new mysqli($servername, $username, $password, $dbname);
@@ -14,14 +11,13 @@
 		die("Connection failed: " . $conn->connect_error);
 	} 
 	
-$usr = "";
-$subj ="";
-$keyw ="";
-$cont ="";
+    $usr = "";
+    $subj ="";
+    $keyw ="";
+    $cont ="";
 
 
     if(@$_GET['action'] == 'change') {
-       
         $change = true;
         $sql =  "SELECT entry_id, reporter, subject, content, keyword, created_at FROM entry WHERE entry_id = ".$_GET['index'];
         $result = $conn->query($sql);
@@ -32,9 +28,6 @@ $cont ="";
         $keyw =$row["keyword"];
         $cont =$row["content"];
         $foo ="Change";
-        
-        
-        
     }
 
 
@@ -66,30 +59,40 @@ $cont ="";
         $resultcheck = $conn->query($sqlcheck);
         $rowcheck = $resultcheck->fetch_assoc();
         if($change == false){
-        if ($resultcheck->num_rows > 0){
-            // priv must be greater than 6
-            if ($rowcheck['priv'] > 6){
-            	
-                
-                $sql = "INSERT INTO entry (session_id, reporter, subject, keyword, content) VALUES ('$session_id', '$reporter', '$subject', '$keyword', '$content')";
-        		if ($conn->query($sql) === TRUE) {
-        			$error = "New entry created successfully";
-        		} else {
-        			$error = "Error: " . $sql . "<br>" . $conn->error;
-        		}
+            if ($resultcheck->num_rows > 0){
+                // priv must be greater than 6
+                if ($rowcheck['priv'] > 6){
+                    $sql = "INSERT INTO entry (session_id, reporter, subject, keyword, content) VALUES ('$session_id', '$reporter', '$subject', '$keyword', '$content')";
+            		if ($conn->query($sql) === TRUE) {
+            			$error = "New entry created successfully";
+            		} else {
+            			$error = "Error: " . $sql . "<br>" . $conn->error;
+            		}
+                } else {
+                    $error = "Error: Entry not created - Privileges are insufficient";
+                }
             } else {
                 $error = "Error: Entry not created - Privileges are insufficient";
             }
-        } else {
-            $error = "Error: Entry not created - Privileges are insufficient";
-        }}else{
-            $sql = "UPDATE entry SET session_id = '$session_id', reporter = '$reporter', subject = '$subject', keyword = '$keyword',content = '$content' WHERE entry_id= ".$_GET['index'];
-            if ($conn->query($sql) === TRUE) {
-                $error = "Entry updated successfully";
-        
-        
+        }else{
+            if ($resultcheck->num_rows > 0){
+                // priv must be greater than 6
+                if ($rowcheck['priv'] > 6){
+                    $sql = "UPDATE entry SET session_id = '$session_id', reporter = '$reporter', subject = '$subject', keyword = '$keyword',content = '$content' WHERE entry_id= ".$_GET['index'];
+                    if ($conn->query($sql) === TRUE)
+                        $error = "Entry updated successfully";
+                    $usr = "";
+                    $subj = "";
+                    $keyw = "";
+                    $cont = "";
+                } else {
+                    $error = "Error: Entry not changed - Privileges are insufficient";
+                }
+            } else {
+                $error = "Error: Entry not changed - Privileges are insufficient";
+            }
         }
-	}}
+	}
 	$conn->close();
 ?>
 
