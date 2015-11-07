@@ -1,0 +1,5 @@
+jersey all jars in all folders of jersey(is in 05 folder)
+bootstrap & jQuery in 05 folder		(is already in workspace, js css folders)
+tomcat in 05 folder 			(create new tomcat server with this as install directory)
+sqlite driver in 05 folder 		(add as lib)
+

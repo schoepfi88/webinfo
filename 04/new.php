@@ -106,9 +106,9 @@
         <script language="javascript" type="text/javascript" src="/script/control.js"></script>
     </head>
 
-    <body>
+    <body onload="hideFunctions()">
         <div id="menu">
-            <ul>
+            <ul id="menubar">
                 <li><a href="/">Home</a></li>
                 <li><a href="/api/entry/create">Create Entry</a></li>
                 <li><a href="/">About</a></li>
