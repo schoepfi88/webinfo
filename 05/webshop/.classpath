@@ -11,8 +11,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="lib" path="/home/csl/uni/7.Semester/wis/ps/05/log4j-1.2.17.jar"/>
 	<classpathentry kind="lib" path="/home/csl/uni/7.Semester/wis/ps/05/jaxrs-ri/lib/jersey-server.jar"/>
 	<classpathentry kind="lib" path="/home/csl/uni/7.Semester/wis/ps/05/jaxrs-ri/lib/jersey-media-jaxb.jar"/>
@@ -43,7 +41,10 @@
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/home/csl/Dropbox/uni/7.Semester/wis/ps/05/jersey-media-multipart-2.22.1.jar"/>
+	<classpathentry kind="lib" path="/home/csl/Dropbox/uni/7.Semester/wis/ps/05/jersey-media-sse-2.22.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

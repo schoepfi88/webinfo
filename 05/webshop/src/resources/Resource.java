@@ -1,6 +1,8 @@
 package resources;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -11,7 +13,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-
 import db.Sqlite;
 import models.Item;
 
@@ -25,6 +26,16 @@ public class Resource {
 		Item item = db.getItem();
 		return item;
 	}
+	
+	@GET
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	@Path("/items")
+	public List<Item> getItems() {
+		Sqlite db = Sqlite.getInstance();
+		ArrayList<Item> items = db.getItems();
+		return items;
+	}
+	
 	@POST
 	@Produces(MediaType.TEXT_HTML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)

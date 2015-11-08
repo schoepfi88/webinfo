@@ -20,6 +20,16 @@
 	color: orange;
 }
 
+.panel-heading {
+	background-color: orange !important;
+	color: white !important;
+	border-color: orange !important;
+}
+
+.panel {
+	border-color: orange !important;
+}
+
 * {
 	font-family: Montserrat !important;
 }
