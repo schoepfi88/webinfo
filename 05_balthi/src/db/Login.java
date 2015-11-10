@@ -67,7 +67,7 @@ public class Login extends HttpServlet {
 			if (rs.next()) {
 
 				
-				response.getWriter().append("<script language=\"javascript\">window.alert('User Login Successfull');window.location=\"index.jsp\";</script>");
+				response.getWriter().append("<script language=\"javascript\">showAlert('Login Successfully');</script>");
 				User user = User.getInstance();
 				user.logIn(rs.getInt(1), rs.getString(2), rs.getInt(4));
 				

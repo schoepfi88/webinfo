@@ -37,8 +37,9 @@
 					<%
 						User user = User.getInstance();
 						String usr = user.getUsername();
-						out.println("<li><a href=\"#\">" + user.getUsername() + "</a></li>");
+						//out.println("<li><a href=\"#\">" + user.getUsername() + "</a></li>");
 					%>
+					<li><a href="#/"> <% user.getUsername(); %></a></li>
 					<li><a href="/webshop/Logout">Logout</a></li>
 				</ul>
 				<form class="navbar-form navbar-right" role="search">

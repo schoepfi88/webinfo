@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class loadProductServlet
  */
-@WebServlet("/loadProductServlet")
+@WebServlet("/products")
 public class loadProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,21 +30,21 @@ public class loadProductServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 
 	
-		String tmp = request.getParameter("tmp");
-		switch (tmp) {
-		case "allNames":
+		//String tmp = request.getParameter("tmp");
+		//switch (tmp) {
+		//case "allNames":
 			try {
 				response.getWriter().write(Sqlite.getInstance().getItemNames());
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			break;
+//			break;
 
-		case "bla":
+//		case "bla":
 			//response.getWriter().write(MusicDatabase.getInstance().getBandsAndAlbums());
-			break;
-		}
+//			break;
+//		}
 
 	}
 

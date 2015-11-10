@@ -13,6 +13,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+
 import db.Sqlite;
 import models.Item;
 
@@ -20,7 +21,7 @@ import models.Item;
 public class Resource {
 	// This method is called if XMLis request
 	@GET
-	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
 	public Item getItem() throws ClassNotFoundException {
 		Sqlite db = Sqlite.getInstance();
 		Item item = db.getItem(1);
@@ -28,7 +29,7 @@ public class Resource {
 	}
 	
 	@GET
-	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	@Produces({MediaType.APPLICATION_JSON })
 	@Path("/items")
 	public List<Item> getItems() throws ClassNotFoundException {
 		Sqlite db = Sqlite.getInstance();

@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 /**
  * Servlet implementation class loadMoreServlet
  */
-@WebServlet("/loadMoreServlet")
+@WebServlet("/more")
 public class loadMoreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
