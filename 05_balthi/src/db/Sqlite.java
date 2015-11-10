@@ -13,6 +13,7 @@ import org.sqlite.SQLiteDataSource;
 
 public class Sqlite {
 	private static Sqlite instance;
+	private String dbPath = new DatabasePath().getPath();
 
 	private Sqlite() {
 
@@ -31,7 +32,7 @@ public class Sqlite {
 		try {
 			// create a database connection
 			Connection c = DriverManager
-					.getConnection("jdbc:sqlite:/Users/balthazur/Programming/workspace_mars/webshop/src/db/shop.db");
+					.getConnection(dbPath);
 			c.setAutoCommit(false);
 			System.out.println("Opened database successfully");
 
@@ -63,7 +64,7 @@ public class Sqlite {
 		try {
 			// create a database connection
 			Connection c = DriverManager
-					.getConnection("jdbc:sqlite:/Users/balthazur/Programming/workspace_mars/webshop/src/db/shop.db");
+					.getConnection(dbPath);
 			c.setAutoCommit(false);
 			System.out.println("Opened database successfully");
 
@@ -93,7 +94,7 @@ public class Sqlite {
 		try {
 			// create a database connection
 			Connection c = DriverManager
-					.getConnection("jdbc:sqlite:/Users/balthazur/Programming/workspace_mars/webshop/src/db/shop.db");
+					.getConnection(dbPath);
 			c.setAutoCommit(false);
 			System.out.println("Opened database successfully");
 
@@ -124,7 +125,7 @@ public class Sqlite {
 		try {
 			boolean initialize = SQLiteJDBCLoader.initialize();
 			SQLiteDataSource dataSource = new SQLiteDataSource();
-			dataSource.setUrl("jdbc:sqlite:/Users/balthazur/Programming/workspace_mars/webshop/src/db/shop.db");
+			dataSource.setUrl(dbPath);
 			Connection c = dataSource.getConnection();
 			c.setAutoCommit(false);
 			System.out.println("Opened database successfully");

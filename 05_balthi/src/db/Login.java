@@ -23,7 +23,7 @@ import models.User;
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private String dbPath = new DatabasePath().getPath();
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -56,7 +56,7 @@ public class Login extends HttpServlet {
 			Class.forName("org.sqlite.JDBC");
 
 			connection = DriverManager
-					.getConnection("jdbc:sqlite:/Users/balthazur/Programming/workspace_mars/webshop/src/db/shop.db");
+					.getConnection(dbPath);
 			PreparedStatement pstmt = connection
 					.prepareStatement("SELECT * FROM user WHERE user_name like ? AND password like ?");
 			pstmt.setString(1, usrn);

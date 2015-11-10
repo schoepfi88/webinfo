@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Register")
 public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private String dbPath = new DatabasePath().getPath();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -50,7 +50,7 @@ public class Register extends HttpServlet {
 			Class.forName("org.sqlite.JDBC");
 
 			connection = DriverManager
-					.getConnection("jdbc:sqlite:/Users/balthazur/Programming/workspace_mars/webshop/src/db/shop.db");
+					.getConnection(dbPath);
 			
 			//stmt = connection.createStatement();
 		      //String sql = "INSERT INTO user (user_name, password, privilege) " +
@@ -67,7 +67,7 @@ public class Register extends HttpServlet {
 			
 			if (ctrl > 0) {
 
-				response.getWriter().append("<script language=\"javascript\">window.alert('User Registration Successfull');window.location=\"index.jsp\";</script>");
+				response.getWriter().append("<script language=\"javascript\">window.alert('User Registration Successfully');</script>");
 			} else {
 				response.getWriter().append("<script language=\"javascript\">window.alert('ERROR\nUser Registration UNSuccessfull');window.location=\"index.jsp\";</script>");
 			}
