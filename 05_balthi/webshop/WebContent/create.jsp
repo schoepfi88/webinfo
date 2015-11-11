@@ -1,3 +1,12 @@
+<%@ page import="db.Sqlite, java.util.ArrayList, models.Category" language="java"
+	contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII"%>
+	
+	<%
+	ArrayList<Category> categories = Sqlite.getInstance().getCategories();
+	System.out.println("categories size: "+ categories.size()+ "  "+categories.get(0).getName());
+	
+	%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,8 +29,16 @@
 				<label for="area">Description</label>
 				<textarea class="form-control" name="area" rows="3"></textarea>
 				<br/>
+				<%for(int i = 0; i < categories.size();i++){
+			
+					out.println("<input type=\"radio\" name=\"category\" id=\"category"+categories.get(i).getId()+"\">"+categories.get(i).getName());
+					out.println("<br>");
+				}
+				%>
 				<input type="submit" value="Submit" />
 			</form>
+		
+	
 		</div>
 	</div>
 </body>
