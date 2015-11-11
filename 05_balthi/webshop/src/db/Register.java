@@ -49,8 +49,7 @@ public class Register extends HttpServlet {
 		try {
 			Class.forName("org.sqlite.JDBC");
 
-			connection = DriverManager
-					.getConnection(dbPath);
+			connection = DriverManager.getConnection(dbPath);
 			
 			//stmt = connection.createStatement();
 		      //String sql = "INSERT INTO user (user_name, password, privilege) " +
@@ -66,8 +65,7 @@ public class Register extends HttpServlet {
 			int ctrl = pstmt.executeUpdate();
 			
 			if (ctrl > 0) {
-
-				response.getWriter().append("<script language=\"javascript\">window.alert('User Registration Successfully');</script>");
+				response.getWriter().append("<script language=\"javascript\">window.alert('User Registration Successfull');window.location=\"index.jsp\";</script>");
 			} else {
 				response.getWriter().append("<script language=\"javascript\">window.alert('ERROR\nUser Registration UNSuccessfull');window.location=\"index.jsp\";</script>");
 			}

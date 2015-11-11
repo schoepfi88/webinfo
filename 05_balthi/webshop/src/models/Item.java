@@ -2,9 +2,6 @@ package models;
 
 
 import javax.xml.bind.annotation.XmlRootElement;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.google.gson.Gson;
 @XmlRootElement
 public class Item {
@@ -13,6 +10,10 @@ public class Item {
 	private String description;
 	private String author;
 	private float price;
+	
+	public Item (){
+		
+	}
 	
 	public String getTitle() {
 		return title;
@@ -48,5 +49,10 @@ public class Item {
 	public String itemToJSON(){
 		return new Gson().toJson(this);
 	}
+	@Override
+	public String toString() {
+		return "Track [title=" + title + ", desc=" + description + "]";
+	}
+	
 
 }

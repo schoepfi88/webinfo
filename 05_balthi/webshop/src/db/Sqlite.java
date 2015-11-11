@@ -3,7 +3,10 @@ package db;
 import java.sql.*;
 import java.util.ArrayList;
 
+<<<<<<< HEAD:05_balthi/webshop/src/db/Sqlite.java
 import models.Category;
+=======
+>>>>>>> origin/master:05_balthi/src/db/Sqlite.java
 import models.Item;
 import models.Name;
 
