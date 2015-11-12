@@ -10,6 +10,7 @@ public class Item {
 	private String description;
 	private String author;
 	private float price;
+	private String created_at;
 	
 	public Item (){
 		
@@ -49,10 +50,13 @@ public class Item {
 	public String itemToJSON(){
 		return new Gson().toJson(this);
 	}
-	@Override
-	public String toString() {
-		return "Track [title=" + title + ", desc=" + description + "]";
+	
+	public void setCreatedAt(String time){
+		created_at = time;
 	}
 	
+	public String getCreatedAt(){
+		return created_at;
+	}
 
 }

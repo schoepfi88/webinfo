@@ -1,7 +1,11 @@
 *~
 05/.metadata/*
-05_balthi/.classpath
-05_balthi/target/*
 05/.metadata/
 05/
-05_balthi/target/
+05_balthi/webshop/.metadata/
+05_balthi/webshop/target/
+05_balthi/webshop/target/*
+05_balthi/webshop/build/
+05_balthi/webshop/.settings/
+05_balthi/webshop/.project
+05_balthi/webshop/.classpath

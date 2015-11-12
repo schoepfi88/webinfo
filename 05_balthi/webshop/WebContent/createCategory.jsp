@@ -1,38 +1,24 @@
 <%@ page import="db.Sqlite, resources.Resource, java.util.ArrayList, models.Category" language="java"
 	contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII"%>
-	
-	<%
-	ArrayList<Category> categories = Sqlite.getInstance().getCategories();
-	System.out.println("categories size: "+ categories.size()+ "  "+categories.get(0).getName());
-	%>
-
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>Create Item</title>
+	<title>Create Category</title>
 	<%@include file="navbar.jsp" %>
 </head>
 <body>
-	<h1 class="h1"> Create Item </h1>
+	<h1 class="h1"> Create Category </h1>
 	<div class="row">
 		<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
 		</div>
 		<div class="col-xs-10 col-md-10 col-sm-10 col-lg-10">
-			<form class="form-group" action="../webshop/rest/item" method="POST">
-				<label for="author">Author</label>
-				<input class="form-control" name="author" />
-				<br/>
-				<label for="title">Title</label>
-				<input class="form-control" name="title" />
+			<form class="form-group" action="../webshop/rest/category" method="POST">
+				<label for="name">Name</label>
+				<input class="form-control" name="name" />
 				<br/>
 				<label for="description">Description</label>
 				<textarea class="form-control" name="description" rows="3"></textarea>
 				<br/>
-				<%for(int i = 0; i < categories.size();i++){
-					out.println("<input type=\"radio\" name=\"category\" id=\"category"+categories.get(i).getId()+"\">"+categories.get(i).getName());
-					out.println("<br>");
-				}
-				%>
 				<input type="submit" value="Submit" />
 			</form>
 			<% if (Resource.getFeedbackTrigger() == Resource.getLoadTrigger()) { %>

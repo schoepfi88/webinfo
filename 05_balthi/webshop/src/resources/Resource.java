@@ -10,6 +10,7 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -19,22 +20,25 @@ import models.Item;
 
 @Path("/item")
 public class Resource {
-	// This method is called if XMLis request
-	@GET
-	@Produces({ MediaType.APPLICATION_JSON })
-	public Item getItem() throws ClassNotFoundException {
-		Sqlite db = Sqlite.getInstance();
-		Item item = db.getItem(1);
-		return item;
-	}
-	
+	private static String feedback = "";
+	private static int feedbackTrigger = 0;
+	private static int loadTrigger = 0;
+	private static int errorTrigger = 0;
 	@GET
 	@Produces({MediaType.APPLICATION_JSON })
-	@Path("/items")
 	public List<Item> getItems() throws ClassNotFoundException {
 		Sqlite db = Sqlite.getInstance();
 		ArrayList<Item> items = db.getItems();
 		return items;
+	}
+	
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("{id}")
+	public Item getItem(@PathParam("id") int id) throws ClassNotFoundException {
+		Sqlite db = Sqlite.getInstance();
+		Item item = db.getItem(id);
+		return item;
 	}
 	
 	@POST
@@ -49,10 +53,38 @@ public class Resource {
 		item.setTitle(title);
 		item.setAuthor(author);
 		
-		
 		Sqlite.getInstance().createItem(item);
+		servletResponse.sendRedirect("../create.jsp");
+		Resource.setFeedback("Item successfully created");
+	}
+	
+	public static String getFeedback(){
+		return feedback;
+	}
 
-		//servletResponse.sendRedirect("../index.html");
-		//servletResponse.setStatus(200);
+	public static void setFeedback(String feed){
+		feedback = feed;
+		feedbackTrigger = loadTrigger +1;
+	}
+	
+	public static int getFeedbackTrigger(){
+		return feedbackTrigger;
+	}
+	
+	public static int getLoadTrigger(){
+		return loadTrigger;
+	}
+	
+	public static void incLoadTrigger(){
+		loadTrigger++;
+	}
+	
+	public static void setError(String error){
+		feedback = error;
+		errorTrigger = loadTrigger +1;
+	}
+	
+	public static int getErrorTrigger(){
+		return errorTrigger;
 	}
 } 

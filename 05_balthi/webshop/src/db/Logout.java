@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.User;
+import resources.Resource;
 
 /**
  * Servlet implementation class Logout
@@ -21,8 +22,6 @@ public class Logout extends HttpServlet {
      */
     public Logout() {
         super();
-        
-        
     }
 
 	/**
@@ -31,8 +30,8 @@ public class Logout extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User user = User.getInstance();
 		user.logOut();
-		
-		response.getWriter().append("<script language=\"javascript\">window.alert('User Logged Out');window.location=\"index.jsp\";</script>");
+		Resource.setFeedback("Logout successfull");
+		response.sendRedirect("/webshop");
 	}
 
 	/**

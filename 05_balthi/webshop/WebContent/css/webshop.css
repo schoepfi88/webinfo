@@ -19,12 +19,25 @@
 	text-align: center;
 	color: orange;
 	padding-top: 1%;
+	padding-bottom: 1%;
+}
+
+.author {
+	float: right;
+}
+
+.price {
+	float: right;
 }
 
 .panel-heading {
 	background-color: orange !important;
 	color: white !important;
 	border-color: orange !important;
+}
+
+.alert {
+	margin-bottom: -20px !important;
 }
 
 .panel {

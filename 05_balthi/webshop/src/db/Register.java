@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import resources.Resource;
+
 /**
  * Servlet implementation class Register
  */
@@ -51,11 +53,6 @@ public class Register extends HttpServlet {
 
 			connection = DriverManager.getConnection(dbPath);
 			
-			//stmt = connection.createStatement();
-		      //String sql = "INSERT INTO user (user_name, password, privilege) " +
-		        //           "VALUES ('teest', 'teeeeeeest', 32 );"; 
-		      //stmt.executeUpdate(sql);
-			
 			PreparedStatement pstmt = connection
 					.prepareStatement("INSERT INTO user (user_name, password, privilege) VALUES (?, ?, ?)");
 			pstmt.setString(1, usrn);
@@ -65,9 +62,11 @@ public class Register extends HttpServlet {
 			int ctrl = pstmt.executeUpdate();
 			
 			if (ctrl > 0) {
-				response.getWriter().append("<script language=\"javascript\">window.alert('User Registration Successfull');window.location=\"index.jsp\";</script>");
+				Resource.setFeedback("Registration successfull");
+				response.sendRedirect("/webshop");
 			} else {
-				response.getWriter().append("<script language=\"javascript\">window.alert('ERROR\nUser Registration UNSuccessfull');window.location=\"index.jsp\";</script>");
+				Resource.setError("Registration failed");
+				response.sendRedirect("/webshop/register.jsp");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

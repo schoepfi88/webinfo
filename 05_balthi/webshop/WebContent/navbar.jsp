@@ -1,9 +1,10 @@
-<%@ page import="models.User" language="java"
+<%@ page import="models.User, resources.Resource" language="java"
 	contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII"%>
 
 <!DOCTYPE html>
 <html>
 <head>
+	<% Resource.incLoadTrigger(); %>
 	<link href="css/bootstrap.min.css" rel="stylesheet"></link>
 	<link href="css/webshop.css" rel="stylesheet"></link>
 	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
@@ -13,13 +14,15 @@
 	<script type="text/javascript" src="js/resultsPrinter.js"></script>
 	<script type="text/javascript" src="js/control.js"></script>
 	<script type="text/javascript" src="js/loadProducts.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/loadItems.js"></script>
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<!-- mobile use -->
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-					aria-expanded="false">
+					data-toggle="collapse" data-target=".navbar-collapse"
+					aria-expanded="true">
 					<span class="sr-only">Toggle navigation</span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>

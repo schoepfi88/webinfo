@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.User;
+import resources.Resource;
 
 
 /**
@@ -58,21 +59,18 @@ public class Login extends HttpServlet {
 			connection = DriverManager
 					.getConnection(dbPath);
 			PreparedStatement pstmt = connection
-					.prepareStatement("SELECT * FROM user WHERE user_name like ? AND password like ?");
+					.prepareStatement("Select * from user where user_name like ? and password like ?;");
 			pstmt.setString(1, usrn);
 			pstmt.setString(2, pass);
-
 			ResultSet rs = pstmt.executeQuery();
-			
 			if (rs.next()) {
-
-				
-				response.getWriter().append("<script language=\"javascript\">showAlert('Login Successfully');</script>");
+				Resource.setFeedback("Login successfull");
+				response.sendRedirect("/webshop/index.jsp");
 				User user = User.getInstance();
 				user.logIn(rs.getInt(1), rs.getString(2), rs.getInt(4));
-				
 			} else {
-				response.getWriter().append("<script language=\"javascript\">window.alert('User Login UNSuccessfull');window.location=\"index.jsp\";</script>");
+				Resource.setError("Login failed");
+				response.sendRedirect("/webshop/login.jsp");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
@@ -86,7 +84,6 @@ public class Login extends HttpServlet {
 				System.err.println(e);
 			}
 		}
-		//response.sendRedirect("/webshop/index.jsp");
 	}
 
 }
