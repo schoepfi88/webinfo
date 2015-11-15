@@ -48,6 +48,10 @@
 	border-color: orange !important;
 }
 
+html {
+	overflow-x: hidden;
+}
+
 * {
 	font-family: Montserrat !important;
 }
