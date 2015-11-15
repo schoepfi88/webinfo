@@ -1,7 +1,7 @@
 var app = angular.module("WebShop", []);
 
 app.controller("ItemCtrl", function($scope, $http) {
-	$http.get('http://localhost:8080/webshop/rest/item').
+	$http.get('http://localhost:8080/webshop/api/resource/item').
 	success(function(data, status, headers, config) {
     	console.log(JSON.stringify(data));
     	$scope.items = data;

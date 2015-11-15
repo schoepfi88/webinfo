@@ -4,11 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import models.Category;
 import models.Item;
-import models.Name;
-
 import org.sqlite.SQLiteJDBCLoader;
-
-import com.google.gson.Gson;
 
 import org.sqlite.SQLiteDataSource;
 
@@ -28,7 +24,6 @@ public class Sqlite {
 	}
 	
 	public ArrayList<Category> getCategories(){
-		
 		ArrayList<Category> categories = new ArrayList<>();
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -46,14 +41,12 @@ public class Sqlite {
 			Statement stmt = c.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM category;");
 			while (rs.next()) {
-				System.out.println("Im in while");
-				System.out.println(rs.getString("name"));
-				
-				Category cat = new Category(rs.getInt("id"),rs.getString("name"));
-			
+				Category cat = new Category();
+				cat.setId(rs.getInt("id"));
+				cat.setName(rs.getString("name"));
+				cat.setDescription(rs.getString("description"));
 				categories.add(cat);
 			}
-
 			rs.close();
 			stmt.close();
 			c.close();
@@ -62,13 +55,7 @@ public class Sqlite {
 			System.exit(0);
 		}
 		System.out.println("Operation done successfully");
-
 		return categories;
-
-		
-		
-		
-		
 	}
 	
 	public ArrayList<Item> getItems() throws ClassNotFoundException {
@@ -103,35 +90,6 @@ public class Sqlite {
 		System.out.println("Operation done successfully");
 
 		return items;
-	}
-
-	public String getItemNames() throws ClassNotFoundException {
-		ArrayList<Name> itemNames = new ArrayList<>();
-		Class.forName("org.sqlite.JDBC");
-		try {
-			// create a database connection
-			Connection c = DriverManager
-					.getConnection(dbPath);
-			c.setAutoCommit(false);
-			System.out.println("Opened database successfully");
-
-			Statement stmt = c.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT id, title1 FROM item;");
-			while (rs.next()) {
-				Name name = new Name(rs.getInt("id"),rs.getString("title1"));
-				itemNames.add(name);
-			}
-
-			rs.close();
-			stmt.close();
-			c.close();
-		} catch (Exception e) {
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
-			System.exit(0);
-		}
-		System.out.println("Operation done successfully");
-
-		return  new Gson().toJson(itemNames);
 	}
 
 	public Item getItem(int id) throws ClassNotFoundException {
@@ -177,9 +135,31 @@ public class Sqlite {
 			c.setAutoCommit(false);
 			System.out.println("Opened database successfully");
 			Statement stmt = c.createStatement();
-			String sql = "INSERT INTO item (title1, description, author) ";
-			String values = "VALUES ('" + item.getTitle() + "','" + item.getDescription() + "', '" + item.getAuthor()
+			String sql = "INSERT INTO item (title1, description, author, category) ";
+			String values = "VALUES ('" + item.getTitle() + "','" + item.getDescription() + "', '" + item.getAuthor() + "','" + item.getCategory()
 					+ "');";
+			stmt.executeUpdate(sql + values);
+			stmt.close();
+			c.commit();
+			c.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	public void createCategory(Category cat) throws ClassNotFoundException {
+		Class.forName("org.sqlite.JDBC");
+		try {
+			boolean initialize = SQLiteJDBCLoader.initialize();
+			SQLiteDataSource dataSource = new SQLiteDataSource();
+			dataSource.setUrl(dbPath);
+			Connection c = dataSource.getConnection();
+			c.setAutoCommit(false);
+			System.out.println("Opened database successfully");
+			Statement stmt = c.createStatement();
+			String sql = "INSERT INTO category (name, description) ";
+			String values = "VALUES ('" + cat.getName() + "','" + cat.getDescription() + "');";
 			stmt.executeUpdate(sql + values);
 			stmt.close();
 			c.commit();

@@ -3,7 +3,6 @@
 	
 	<%
 	ArrayList<Category> categories = Sqlite.getInstance().getCategories();
-	System.out.println("categories size: "+ categories.size()+ "  "+categories.get(0).getName());
 	%>
 
 <!DOCTYPE html>
@@ -18,22 +17,24 @@
 		<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
 		</div>
 		<div class="col-xs-10 col-md-10 col-sm-10 col-lg-10">
-			<form class="form-group" action="../webshop/rest/item" method="POST">
+			<form class="form-group" action="../webshop/api/resource/item" method="POST">
 				<label for="author">Author</label>
 				<input class="form-control" name="author" />
-				<br/>
+				<br>
 				<label for="title">Title</label>
 				<input class="form-control" name="title" />
-				<br/>
+				<br>
 				<label for="description">Description</label>
 				<textarea class="form-control" name="description" rows="3"></textarea>
-				<br/>
-				<%for(int i = 0; i < categories.size();i++){
-					out.println("<input type=\"radio\" name=\"category\" id=\"category"+categories.get(i).getId()+"\">"+categories.get(i).getName());
-					out.println("<br>");
-				}
-				%>
-				<input type="submit" value="Submit" />
+				<br>
+				<select name="category" class="selectpicker" multiple data-max-options="1" title="Select Category ...">
+					<%for(int i = 0; i < categories.size();i++){%>
+						<option><% out.println(categories.get(i).getName()); %></option>
+					<%}%>
+				</select>
+				<br>
+				<br>
+				<input class="btn btn-default" type="submit" value="Submit" />
 			</form>
 			<% if (Resource.getFeedbackTrigger() == Resource.getLoadTrigger()) { %>
 				<div id="feedback" class="alert alert-success" role="alert"><% out.println(Resource.getFeedback()); %></div>

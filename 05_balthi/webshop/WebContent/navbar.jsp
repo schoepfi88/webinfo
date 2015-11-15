@@ -7,15 +7,14 @@
 	<% Resource.incLoadTrigger(); %>
 	<link href="css/bootstrap.min.css" rel="stylesheet"></link>
 	<link href="css/webshop.css" rel="stylesheet"></link>
+	<link href="css/bootstrap-select.min.css" rel="stylesheet"></link>
 	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 	<script src="js/jquery-2.1.4.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/buttonEventsInit.js"></script>
-	<script type="text/javascript" src="js/resultsPrinter.js"></script>
 	<script type="text/javascript" src="js/control.js"></script>
-	<script type="text/javascript" src="js/loadProducts.js"></script>
 	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script type="text/javascript" src="js/loadItems.js"></script>
+	<script type="text/javascript" src="js/bootstrap-select.min.js"></script>
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<!-- mobile use -->
@@ -34,7 +33,7 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="/webshop">Home</a></li>
 					<li><a href="/webshop">Items</a></li>
-					<li><a href="#">Categories</a></li>
+					<li><a href="/webshop/categories.jsp">Categories</a></li>
 					<li><a href="/webshop/create.jsp">Create Item</a></li>
 					<li><a href="login.jsp">Login</a></li>
 					<%

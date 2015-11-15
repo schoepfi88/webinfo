@@ -12,14 +12,14 @@
 		<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
 		</div>
 		<div class="col-xs-10 col-md-10 col-sm-10 col-lg-10">
-			<form class="form-group" action="../webshop/rest/category" method="POST">
+			<form class="form-group" action="../webshop/api/resource/category" method="POST">
 				<label for="name">Name</label>
 				<input class="form-control" name="name" />
 				<br/>
 				<label for="description">Description</label>
 				<textarea class="form-control" name="description" rows="3"></textarea>
 				<br/>
-				<input type="submit" value="Submit" />
+				<input class="btn btn-default" type="submit" value="Submit" />
 			</form>
 			<% if (Resource.getFeedbackTrigger() == Resource.getLoadTrigger()) { %>
 				<div id="feedback" class="alert alert-success" role="alert"><% out.println(Resource.getFeedback()); %></div>

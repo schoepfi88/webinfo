@@ -30,6 +30,10 @@
 	float: right;
 }
 
+.desc {
+	float: right;
+}
+
 .panel-heading {
 	background-color: orange !important;
 	color: white !important;

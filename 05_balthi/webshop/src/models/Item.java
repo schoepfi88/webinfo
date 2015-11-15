@@ -9,6 +9,7 @@ public class Item {
 	private String title;
 	private String description;
 	private String author;
+	private String category;
 	private float price;
 	private String created_at;
 	
@@ -57,6 +58,14 @@ public class Item {
 	
 	public String getCreatedAt(){
 		return created_at;
+	}
+	
+	public void setCategory(String category){
+		this.category = category;
+	}
+	
+	public String getCategory(){
+		return this.category;
 	}
 
 }

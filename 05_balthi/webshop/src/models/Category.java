@@ -4,14 +4,10 @@ public class Category {
 
 	private int id;
 	private String name;
+	private String description;
 	
+	public Category() {
 	
-	
-	
-	public Category(int id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
 	}
 	public int getId() {
 		return id;
@@ -24,6 +20,12 @@ public class Category {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getDescription(){
+		return this.description;
+	}
+	public void setDescription(String description){
+		this.description = description;
 	}
 	
 	
