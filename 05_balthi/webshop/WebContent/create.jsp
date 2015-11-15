@@ -27,6 +27,12 @@
 				<label for="description">Description</label>
 				<textarea class="form-control" name="description" rows="3"></textarea>
 				<br>
+				<label for="price">Price</label>
+				<div class="input-group">
+					<span class="input-group-addon">$</span>
+					<input type="text" class="form-control" name="price" aria-label="Amount (to the nearest dollar)">
+				</div>
+				<br>
 				<select name="category" class="selectpicker" multiple data-max-options="1" title="Select Category ...">
 					<%for(int i = 0; i < categories.size();i++){%>
 						<option><% out.println(categories.get(i).getName()); %></option>

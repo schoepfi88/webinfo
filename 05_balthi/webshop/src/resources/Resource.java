@@ -15,9 +15,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import db.Sqlite;
 import models.Item;
 import models.Category;
+import models.Comment;
 
 @Path("/resource")
 public class Resource {
@@ -51,12 +55,15 @@ public class Resource {
 			@FormParam("description") String description,
 			@FormParam("author") String author,
 			@FormParam("category") String category,
+			@FormParam("price") float price,
 			@Context HttpServletResponse servletResponse) throws IOException, ClassNotFoundException {
 		Item item = new Item();
 		item.setDescription(description);
 		item.setTitle(title);
 		item.setAuthor(author);
 		item.setCategory(category);
+		System.out.println(price);
+		item.setPrice(price);
 		Sqlite.getInstance().createItem(item);
 		servletResponse.sendRedirect("../../create.jsp");
 		Resource.setFeedback("Item successfully created");
@@ -78,6 +85,30 @@ public class Resource {
 		Resource.setFeedback("Category successfully created");
 	}
 	
+	@POST
+	@Path("/item/{id}/comment")
+	@Produces(MediaType.TEXT_HTML)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void newComment(String json, @PathParam("id") int item_id, 
+			@Context HttpServletResponse servletResponse) throws IOException, ClassNotFoundException {
+		System.out.println(json);
+		Comment comment = new GsonBuilder().create().fromJson(json, Comment.class);
+		comment.setItemID(item_id);
+		System.out.println(item_id);
+		Sqlite.getInstance().createComment(comment);
+		//servletResponse.sendRedirect("../../createCategory.jsp");
+		//Resource.setFeedback("Comment successfully created");
+	}
+	
+	@GET
+	@Path("/item/{id}/comment")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public ArrayList<Comment> getComments(@PathParam("id") int itemID){
+		Sqlite db = Sqlite.getInstance();
+		ArrayList<Comment> comments = db.getComments(itemID);
+		return comments;
+		
+	}
 	public static String getFeedback(){
 		return feedback;
 	}
