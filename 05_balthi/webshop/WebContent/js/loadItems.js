@@ -37,4 +37,16 @@ app.controller("ItemCtrl", function($scope, $http) {
 		$scope.comment = null;
 		$scope.created = true;
 	}
+	
+	$scope.deleteItem = function(index){
+		var id = $scope.items[index].id;
+		// in resource class wird delete auf dem path /item/{id} gematched // @DELETE @Path("/item/{id}")
+		$http.delete('http://localhost:8080/webshop/api/resource/item/' + id);
+		$scope.tmpItems = $scope.items;
+		$scope.items = null;
+		for (var i = 0; i < $scope.tmpItems.length; i++){
+			if ($scope.tmpItems[i].id != id)
+				$scope.items[i] = $scope.tmpItems[i];
+		}
+	}
 });
