@@ -37,4 +37,9 @@ app.controller("ItemCtrl", function($scope, $http) {
 		$scope.comment = null;
 		$scope.created = true;
 	}
+
+	$scope.deleteItem = function(index){
+		var id = $scope.items[index].id;
+		$http.delete('http://localhost:8080/webshop/api/resource/itme/' + id);
+	}
 });
