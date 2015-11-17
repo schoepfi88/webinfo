@@ -2,9 +2,6 @@ package db;
 
 import java.sql.*;
 import java.util.ArrayList;
-
-import javax.sql.RowSet;
-
 import models.Category;
 import models.Comment;
 import models.Item;
@@ -26,8 +23,8 @@ public class Sqlite {
 		}
 		return Sqlite.instance;
 	}
-
-	public ArrayList<Category> getCategories() {
+	
+	public ArrayList<Category> getCategories(){
 		ArrayList<Category> categories = new ArrayList<>();
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -37,7 +34,8 @@ public class Sqlite {
 		}
 		try {
 			// create a database connection
-			Connection c = DriverManager.getConnection(dbPath);
+			Connection c = DriverManager
+					.getConnection(dbPath);
 			c.setAutoCommit(false);
 			System.out.println("Opened database successfully");
 
@@ -60,13 +58,14 @@ public class Sqlite {
 		System.out.println("Operation done successfully");
 		return categories;
 	}
-
+	
 	public ArrayList<Item> getItems() throws ClassNotFoundException {
 		ArrayList<Item> items = new ArrayList<>();
 		Class.forName("org.sqlite.JDBC");
 		try {
 			// create a database connection
-			Connection c = DriverManager.getConnection(dbPath);
+			Connection c = DriverManager
+					.getConnection(dbPath);
 			c.setAutoCommit(false);
 			System.out.println("Opened database successfully");
 
@@ -101,14 +100,16 @@ public class Sqlite {
 		Class.forName("org.sqlite.JDBC");
 		try {
 			// create a database connection
-			Connection c = DriverManager.getConnection(dbPath);
+			Connection c = DriverManager
+					.getConnection(dbPath);
 			c.setAutoCommit(false);
 			System.out.println("Opened database successfully");
 
+			
 			PreparedStatement pstmt = c.prepareStatement("SELECT * FROM item WHERE id like ?");
-
+			
 			pstmt.setInt(1, id);
-
+			
 			ResultSet rs = pstmt.executeQuery();
 			item.setId(rs.getInt("id"));
 			item.setTitle(rs.getString("title1"));
@@ -138,8 +139,8 @@ public class Sqlite {
 			System.out.println("Opened database successfully");
 			Statement stmt = c.createStatement();
 			String sql = "INSERT INTO item (title1, description, author, category, price) ";
-			String values = "VALUES ('" + item.getTitle() + "','" + item.getDescription() + "', '" + item.getAuthor()
-					+ "','" + item.getCategory() + "','" + item.getPrice() + "');";
+			String values = "VALUES ('" + item.getTitle() + "','" + item.getDescription() + "', '" + item.getAuthor() + "','" + item.getCategory() + "','" + item.getPrice()
+					+ "');";
 			stmt.executeUpdate(sql + values);
 			stmt.close();
 			c.commit();
@@ -149,38 +150,7 @@ public class Sqlite {
 		}
 
 	}
-
-	public int deleteItem(int id) throws ClassNotFoundException {
-		System.out.println("im ind delte 1240492059090");
-		System.out.println("id: "+id);
-		Class.forName("org.sqlite.JDBC");
-		int rowsAffected = 0;
-		try {
-			// create a database connection
-			Connection c = DriverManager.getConnection(dbPath);
-			c.setAutoCommit(false);
-			System.out.println("Opened database successfully");
-
-			PreparedStatement pstmt = c.prepareStatement("DELETE FROM item WHERE id like ?");
-			
-			pstmt.setInt(1, id);
-
-			rowsAffected = pstmt.executeUpdate();
-			c.commit();
-
-			pstmt.close();
-			c.close();
-		} catch (Exception e) {
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
-			System.exit(0);
-		}
-		if (rowsAffected > 0) {
-			System.out.println("Operation done successfully");
-		}
-		System.out.println("ROWS AFFECTED:" + rowsAffected);
-		return rowsAffected;
-	}
-
+	
 	public void createCategory(Category cat) throws ClassNotFoundException {
 		Class.forName("org.sqlite.JDBC");
 		try {
@@ -202,7 +172,7 @@ public class Sqlite {
 		}
 
 	}
-
+	
 	public void createComment(Comment comment) throws ClassNotFoundException {
 		Class.forName("org.sqlite.JDBC");
 		try {
@@ -214,8 +184,7 @@ public class Sqlite {
 			System.out.println("Opened database successfully");
 			Statement stmt = c.createStatement();
 			String sql = "INSERT INTO comment (author, message, title1, item_id) ";
-			String values = "VALUES ('" + comment.getAuthor() + "','" + comment.getMessage() + "','"
-					+ comment.getTitle() + "','" + comment.getItemID() + "');";
+			String values = "VALUES ('" + comment.getAuthor() + "','" + comment.getMessage() + "','" + comment.getTitle() + "','" + comment.getItemID() + "');";
 			stmt.executeUpdate(sql + values);
 			stmt.close();
 			c.commit();
@@ -224,8 +193,8 @@ public class Sqlite {
 			e.printStackTrace();
 		}
 	}
-
-	public ArrayList<Comment> getComments(int id) {
+	
+	public ArrayList<Comment> getComments(int id){
 		ArrayList<Comment> comments = new ArrayList<>();
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -235,7 +204,8 @@ public class Sqlite {
 		}
 		try {
 			// create a database connection
-			Connection c = DriverManager.getConnection(dbPath);
+			Connection c = DriverManager
+					.getConnection(dbPath);
 			c.setAutoCommit(false);
 			System.out.println("Opened database successfully");
 
@@ -262,4 +232,5 @@ public class Sqlite {
 		return comments;
 	}
 
+	
 }

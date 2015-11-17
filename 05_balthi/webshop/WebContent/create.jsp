@@ -1,4 +1,4 @@
-<%@ page import="db.Sqlite, resources.Resource, java.util.ArrayList, models.Category, models.User" language="java"
+<%@ page import="db.Sqlite, resources.Resource, java.util.ArrayList, models.Category" language="java"
 	contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII"%>
 	
 	<%
@@ -19,7 +19,7 @@
 		<div class="col-xs-10 col-md-10 col-sm-10 col-lg-10">
 			<form class="form-group" action="../webshop/api/resource/item" method="POST">
 				<label for="author">Author</label>
-				<input class="form-control" name="author" value="<%out.println(User.getInstance().getUsername());%>" readonly/>
+				<input class="form-control" name="author" />
 				<br>
 				<label for="title">Title</label>
 				<input class="form-control" name="title" />

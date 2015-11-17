@@ -27,9 +27,9 @@
 				<label for="password">Password</label>
 				<input class="form-control" name="password" type="password" />
 				<br/>
-				<input type="submit" value="Submit" />
+				<input class="btn btn-default" type="submit" value="Login" />
+				<div class="btn btn-default" style="float: right;" onclick="location.href='/webshop/register.jsp'">Register</div>
 			</form>
-			<a href=/webshop/register.jsp>Register</a>
 		</div>
 	</div>
 </body>
