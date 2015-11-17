@@ -12,7 +12,7 @@
 	<script src="js/jquery-2.1.4.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/control.js"></script>
-	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/angular.js"></script>
 	<script type="text/javascript" src="js/loadItems.js"></script>
 	<script type="text/javascript" src="js/bootstrap-select.min.js"></script>
 	<script type="text/javascript" src="js/moment.min.js"></script>

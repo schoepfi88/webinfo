@@ -2,6 +2,7 @@ package db;
 
 import java.sql.*;
 import java.util.ArrayList;
+import javax.sql.RowSet;
 import models.Category;
 import models.Comment;
 import models.Item;
@@ -149,6 +150,37 @@ public class Sqlite {
 			e.printStackTrace();
 		}
 
+	}
+
+	public int deleteItem(int id) throws ClassNotFoundException {
+		System.out.println("im ind delte 1240492059090");
+		System.out.println("id: "+id);
+		Class.forName("org.sqlite.JDBC");
+		int rowsAffected = 0;
+		try {
+			// create a database connection
+			Connection c = DriverManager.getConnection(dbPath);
+			c.setAutoCommit(false);
+			System.out.println("Opened database successfully");
+
+			PreparedStatement pstmt = c.prepareStatement("DELETE FROM item WHERE id like ?");
+			
+			pstmt.setInt(1, id);
+
+			rowsAffected = pstmt.executeUpdate();
+			c.commit();
+
+			pstmt.close();
+			c.close();
+		} catch (Exception e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.exit(0);
+		}
+		if (rowsAffected > 0) {
+			System.out.println("Operation done successfully");
+		}
+		System.out.println("ROWS AFFECTED:" + rowsAffected);
+		return rowsAffected;
 	}
 	
 	public void createCategory(Category cat) throws ClassNotFoundException {

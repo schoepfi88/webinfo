@@ -23,22 +23,26 @@
 	  		<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
 				</div>
 			<div class="col-xs-10 col-md-10 col-sm-10 col-lg-10">
-				<a ng-click="getItem($index)">
 				<div class="panel panel-default">
-					<div class="panel-heading">
-						{{item.title}}
-						<span class="author">
-							{{item.author}} - {{item.createdAt}}
-						</span>
-					</div>
-					<div class="panel-body">
-						{{item.description}}
-						<span class="price">
-							{{item.price}} $
-						</span>
-					</div>
+					<a ng-click="getItem($index)">
+						<div class="panel-heading">
+							{{item.title}}
+							<span class="author">
+								{{item.author}} - {{item.createdAt}}
+							</span>
+						</div>
+						<div class="panel-body">
+							{{item.description}}
+							<span class="price">
+								{{item.price}} $
+							</span>
+						</div>
+						<a ng-click="deleteItem($index)">
+							<div class="btn btn-default btn-sm">Remove2</div>
+						</a>
+					</a>
 				</div>
-				</a>
+				
 			</div>
 			
 	  	</div>
