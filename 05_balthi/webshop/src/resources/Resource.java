@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -68,6 +69,23 @@ public class Resource {
 		servletResponse.sendRedirect("../../create.jsp");
 		Resource.setFeedback("Item successfully created");
 	}
+	
+	@DELETE
+	@Path("/item/{id}") // maybe /item/delete/id???
+	//@Produces(MediaType.TEXT_HTML)
+	public void deleteItem(@PathParam("id") int id) throws ClassNotFoundException {
+		System.out.println("im in deleteItem in get");
+		Sqlite db = Sqlite.getInstance();
+		int rA = db.deleteItem(id); //rA = rows affected
+		if(rA >0){
+			Resource.setFeedback("Item successfully deleted");
+		}else{
+			Resource.setFeedback("Delete not successfull");
+		}
+	}
+	
+	
+	
 	
 	@POST
 	@Path("/category")
